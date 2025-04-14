@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.1">
+    <link rel="stylesheet" href="/assets/css/main-page.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sriracha&display=swap" rel="stylesheet">
+    
+    <title>Document</title>
+</head>
+<body>
+    <div class="fondo-oscuro">
+
+        <header>
+            <div class="logo">
+                <img src="/assets/img/libro.png" alt="Logo de StudyHub">
+                <span>StudyHub</span>
+            
+            </div>
+    
+            <div class="nav-center">
+                <nav>
+                    <a href="#caracteristicas">Caracteristicas</a>
+                    <a href="">Como funciona</a>
+                    <a href="">Referencias</a>
+                </nav>
+            </div>
+    
+            <div class="nav-actions">
+                <nav>
+                    <button class="profile" type="button" onclick="alert('¡Funciona!')">
+                        <img src="/assets/img/profile.svg" alt="perfil">
+                        <span>Perfil</span>
+                    </button>     
+                    <button class="exit" type="button" onclick="logoutSesion()">
+                        <img src="/assets/img/logout.svg" alt="perfil">
+                        <span>Salir</span>
+                    </button>            
+                </nav>
+            </div>
+        </header>
+
+        <main class="main-container"> 
+
+            <div class="title-add-container">
+                <h1>Mis Cursos</h1>
+
+                <button onclick="openModal('create')">
+                <img src="/assets/img/add.svg" alt="agregar curso">
+                <span>Nuevo Curso</span>
+                </button>
+            </div>
+    
+            <div class="courses-container">
+                <div class="courses-row"></div>
+            </div>
+
+        </main>
+
+        <div class="modal">
+
+        </div>
+
+    </div>
+    <script src="/assets/js/main-page.js"></script>
+    <script src="/assets/js/modal-main-page.js"></script>
+    <script src="/assets/js/profile.js"></script>
+
+</body>
+</html>

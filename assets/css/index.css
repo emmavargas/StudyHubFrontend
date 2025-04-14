@@ -1,0 +1,385 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-color: whitesmoke;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px darkgray solid;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: whitesmoke;
+
+}
+
+header .logo span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+
+
+.nav-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-center nav {
+    display: flex;
+    gap: 15px;
+
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.nav-actions nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.nav-actions button {
+    background-color: black;
+    color: white;
+    padding: 10px 15px 10px 15px;
+    margin: 5px 5px 5px 0px;
+    border-radius: 5px;
+    border: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+button:hover {
+    background-color: #333
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+
+.logo img {
+    width: 30px;
+    height: 30px;
+}
+
+
+
+main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1400px;
+    flex: 1;
+    min-height: 100vh;
+}
+
+
+.content-main {
+    min-width: 50%;
+
+}
+
+.content-main h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 60px;
+    margin: 0px;
+    margin-bottom: 15px;
+    padding-right: 60px;
+}
+.content-main p {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    padding-right: 50px;
+
+    margin: 0px;
+    color: rgb(151, 148, 148);
+}
+
+.content-main .comenzar {
+
+    background-color: black;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px 20px 10px 20px;
+    margin: 15px 5px 5px 0px;
+    border-radius: 5px;
+    border: 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.comenzar:hover {
+    background-color: #333
+}
+
+.content-main .conocer{
+    background-color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    padding: 10px 20px 10px 20px;
+    margin: 15px 5px 5px 0px;
+    border-radius: 5px;
+    border: 0.5px solid rgb(219, 218, 218);
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.conocer:hover {
+    background-color: rgb(236, 234, 234);
+}
+
+
+
+
+.imagen-principal {
+    min-width: 50%;
+}
+
+
+.imagen-study {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+    height: 80%;
+}
+
+
+section {
+    margin: 0;
+}
+
+.caracteristicas{
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-top: 150px;
+    padding-bottom: 150px;
+}
+
+.caracteristicas .caracteristicas-titulos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+
+}
+
+.caracteristicas .caracteristicas-titulos h2 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 35px;
+    margin: 0px 0px 20px 0px;
+}
+
+.caracteristicas .caracteristicas-titulos div {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: white;
+    background-color: black;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 5px 10px 5px 10px;
+}
+
+.caracteristicas .caracteristicas-titulos span{
+    color: rgb(151, 148, 148);
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+}
+
+
+
+
+.caracteristicas-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    gap: 20px;
+}
+
+
+.caracteristicas-item .item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 33.33%;
+    height: 200px;
+}
+
+.caracteristicas-item .item img {
+    width: 50px;
+    height: 50px;
+}
+
+.caracteristicas-item .item h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0px;
+    margin-top: 10px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.caracteristicas-item .item p {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    margin: 0px;
+    text-align: center;
+    color: rgb(151, 148, 148);
+    padding: 0px 20px 0px 20px;
+}
+
+
+
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-width: 100%;
+    background-color: white;
+
+}
+
+.login-container .login-box{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 400px;
+    width: 100%;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+    margin-top: 200px;
+    margin-bottom: 200px;
+}
+
+
+.login-container .login-box h2 {
+    text-align: center;
+    color: #333;
+    font-size: 25px;
+    margin-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+}
+
+.login-container .login-box .input-group {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+}
+.login-container .login-box .input-group label {
+    display: block;
+    font-size: 15px;
+    margin-top: 15px;
+    padding: 0px 0px 5px 10px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    color: rgb(138, 138, 138);
+}
+
+.login-container .login-box .input-group input {
+    border-radius: 20px;
+    padding: 5px 10px 5px 10px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+}
+
+
+
+
+.login-container .login-box .login-options{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.login-container .login-box .login-options button {
+    background-color: black;
+    color: white;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    padding: 10px 20px 10px 20px;
+    margin: 15px 5px 5px 0px;
+    border-radius: 5px;
+    border: 0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-container .login-box .login-options button:hover {
+    background-color: #333
+}
+
+.login-container .login-box .login-options p {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: rgb(151, 148, 148);
+    margin-top: 10px;
+}
+
+.message-login {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: rgb(151, 148, 148);
+    margin-top: 10px;
+    text-align: center;
+}

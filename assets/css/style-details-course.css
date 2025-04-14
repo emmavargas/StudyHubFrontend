@@ -1,0 +1,475 @@
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-color: whitesmoke;
+    overflow: auto;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px darkgray solid;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: whitesmoke;
+
+}
+
+header .logo span {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+
+
+.nav-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-center nav {
+    display: flex;
+    gap: 15px;
+
+}
+
+.nav-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.nav-actions nav {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.nav-actions .profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: whitesmoke;
+    color: rgb(0, 0, 0);
+    padding: 10px 15px 10px 15px;
+    margin: 5px 5px 5px 0px;
+    border-radius: 5px;
+    border: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    gap: 10px;
+}
+
+.nav-actions .profile:hover {
+    background-color: #e7e7e7
+}
+
+.nav-actions .profile img {
+    width: 15px;
+    height: 15px;
+}
+
+
+
+.nav-actions .exit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: whitesmoke;
+    color: rgb(233, 55, 55);
+    padding: 10px 15px 10px 15px;
+    margin: 5px 5px 5px 0px;
+    border-radius: 5px;
+    border: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    gap: 10px;
+}
+.nav-actions .exit:hover {
+    background-color: #f3e5e5
+}
+
+.nav-actions .exit img {
+    width: 15px;
+    height: 15px;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+
+.logo img {
+    width: 30px;
+    height: 30px;
+}
+
+.main-container {
+    max-width: 1600px;
+    margin-top: 110px;
+    padding: 0px 115px;
+    display: flex;
+    margin-right: auto;
+    margin-left: auto;
+    flex-direction: column;
+    min-height: 100%;
+    padding-bottom: 50px;
+}
+
+.back-course {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+.back-course .back {
+    display: flex;
+    align-items: center;
+    background-color: whitesmoke;
+    color: rgb(0, 0, 0);
+    padding: 5px ;
+    gap: 10px;
+    border-radius: 5px;
+    border: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.back-course .back:hover {
+    background-color: #ebeaea;
+}
+
+
+
+.title-add-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.title-add-container h1 {
+    margin: 0;
+    font-size: 30px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+}
+
+.title-add-container button {
+    display: flex;
+    align-items: center;
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    gap: 10px;
+    border-radius: 5px;
+    border: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.title-add-container button:hover {
+    background-color: #1a1919;
+}
+
+.title-add-container button img {
+    width: 15px;
+    height: 15px;
+}
+
+.bibliography-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+    padding: 20px 15px;
+    margin-bottom: 30px;
+    font-family: 'Inter', sans-serif;
+}
+
+.bibliography-container h2{
+    font-size: 25px;
+    font-weight: 500;
+}
+.bibliography-container p{
+    font-size: 15px;
+    font-weight: 400;
+}
+
+.topics-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    align-items: flex-start;
+    font-family: 'Inter', sans-serif;
+}
+.topics-container h3 {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.topics-collection {
+    display: flex;
+    justify-content: space-around;
+    align-items: stretch;
+    width: 100%;
+    flex-direction: column;
+    gap: 15px;
+    min-height: 0;
+}
+.item-card .title-card .card-icons{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.item-card .title-card{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.item-card .title-card img {
+    width: 30px;
+    height: 30px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+
+}
+.item-card .title-card img:hover {
+    background-color:rgb(236, 236, 236);
+}
+
+
+
+
+
+
+.topics-collection .item-card{
+    display:flex;
+    flex-direction: column;
+    padding: 25px 15px;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 15px;
+    border: 1px solid lightgray;
+}
+
+.item-card h4 {
+    font-size: 20px;
+    font-weight: 600;
+}
+.item-card p {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+
+
+.button-group {
+    display: flex;
+    padding: 5px;
+    background-color: rgb(224, 224, 224);
+    border-radius: 4px;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.button-group .switch-btn {
+    padding: 10px 20px;
+    border: none;
+    background-color: #f0f0f0;
+    cursor: pointer;
+    font-size: 16px;
+    color: #666;
+    text-align: center;
+}
+
+.button-group .switch-btn.active {
+    background-color: rgb(224, 224, 224);
+    color: #000000;
+}
+
+
+
+
+
+
+
+
+
+
+.modal {
+    display: none; 
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1001; 
+    overflow: auto; 
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+
+.creation-modal {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    background-color: white;
+    margin: 150px auto;
+    padding: 20px;
+    gap: 25px;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin: 0;
+}
+
+.close {
+    font-size: 24px;
+    cursor: pointer;
+    color: rgb(138, 138, 138);
+}
+
+.close:hover {
+    color: rgb(0, 0, 0);
+}
+
+.creation-modal p {
+    font-weight: 400;
+    color:rgb(138, 138, 138);
+    font-size: 14px;
+}
+
+.item-card-modal {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.item-card-modal h4 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.item-card-modal input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.item-card-modal input:focus {
+    outline: none;
+    border-color: rgb(102, 100, 100);
+}
+
+
+
+.options-add-close{
+    display: flex;
+    align-items: center;
+    justify-content:flex-end;
+    width: 100%;
+    gap: 10px;
+}
+
+.options-add-close .create {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.options-add-close .create:hover {
+    background-color: #313030;
+}
+.options-add-close .cancel {
+    background-color: rgb(235, 235, 235);
+    color: black;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.options-add-close .cancel:hover {
+    background-color: #f0f0f0;
+}
+

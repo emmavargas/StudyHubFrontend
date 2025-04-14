@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.1">
+    <link rel="stylesheet" href="/assets/css/exam-ai.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sriracha&display=swap" rel="stylesheet">
+    
+    <title>Document</title>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="/assets/img/libro.png" alt="Logo de StudyHub">
+            <span>StudyHub</span>
+        
+        </div>
+
+        <div class="nav-center">
+            <nav>
+                <a href="#caracteristicas">Caracteristicas</a>
+                <a href="">Como funciona</a>
+                <a href="">Referencias</a>
+            </nav>
+        </div>
+
+        <div class="nav-actions">
+            <nav>
+                <button class="profile" type="button" onclick="alert('¡Funciona!')">
+                    <img src="/assets/img/profile.svg" alt="perfil">
+                    <span>Perfil</span>
+                </button>     
+                <button class="exit" type="button" onclick="logoutSesion()">
+                    <img src="/assets/img/logout.svg" alt="perfil">
+                    <span>Salir</span>
+                </button>            
+            </nav>
+        </div>
+    </header>
+
+    <div class="loading" id="loading">
+        <div class="loading-container">
+            <h2>Preparando Examen</h2>
+            <img class="img-loading" src="/assets/img/brain.svg" alt="imagen girando mientras carga">
+            <div class="progress-bar">
+                <div class="progress">
+                    <div id="progress-bar-ai" class="progress-value"></div>
+                </div>
+            </div>
+            <div class="container-information">
+                <span class="information-connection-ai"></span>
+            </div>
+        </div>
+    </div>
+    <main class="main-container" id="page-load">
+        <div class="header-exam">
+            <h1>Cuestionario</h1>
+            <div class="progress-bar">
+                <div class="progress">
+                    <div id="progress-bar" class="progress-value"></div>
+                </div>
+            </div>
+            <div class="bar-info">
+                <span class="count-question-exam">Pregunta 1 de 10</span>
+                <span class="percentage-exam">0% completado</span>
+            </div>   
+        </div>
+
+        <div class="container-exam">
+            <h2 id="question">Aca va la pregunta que debemos contestar, asi que dejo una prueba larga</h2>
+
+            <div class="options-exam">
+                <div class="option">
+                    <input type="radio"  value="1" id="option1" name="option" onclick="responseQuestion(this)">
+                    <label class="option-container" for="option1" id="text-option1">
+                        <span class="radio-button"></span>
+                        <span id="asd1"></span>                    </label>
+                </div>
+
+                <div class="option">
+                    <input type="radio" value="2" id="option2" name="option" onclick="responseQuestion(this)">
+                    <label class="option-container" for="option2" id="text-option2">
+                        <span class="radio-button"></span>
+                        <span id="asd2"></span>                    </label>
+                </div>
+                <div class="option">
+                    <input type="radio" value="3" id="option3" name="option" onclick="responseQuestion(this)">
+                    <label class="option-container" for="option3" id="text-option3">
+                        <span class="radio-button"></span>
+                        <span id="asd3"></span>                    </label>
+                </div>
+                <div class="option">
+                    <input type="radio" value="4" id="option4" name="option" onclick="responseQuestion(this)">
+                    <label class="option-container" for="option4" id="text-option4">
+                        <span class="radio-button"></span>
+                        <span id="asd4"></span>
+                    </label>
+                </div>
+
+            </div>
+            
+            <button id="btn-next-finish" class="btn-next-finish" onclick="nextQuestion()">
+                Siguiente pregunta
+            </button>
+
+        </div>
+
+    </main>
+    <div class="result-container" id="result-container">
+        <h2>Resultados del Cuestionario</h2>
+        <div class="container-percentage">
+            <span id="percentage-exam-result" >100%</span>
+        </div>
+        <span id="text-percentage-exam-result">Necesitas repasar mas</span>
+        <div class="answers">
+            <div class="result-answers">
+                <span id=number-correct-answers>0</span>
+                <span>Correctas</span>
+            </div>
+            <div class="result-answers">
+                <span id=number-incorrect-answers>0</span>
+                <span>Incorrectas</span>
+            </div>
+        </div>
+        <div class="container-option-boton">
+            <button class="back-course" onclick="window.location.href='/user/courses'">Volver a Cursos</button>
+            <button class="restart-exam" onclick="restartExam()">Reintentar Cuestionario</button>
+        </div>
+
+        <div class="feedback-container">
+            <h3>Revision de respuestas:</h3>
+        </div>
+
+    </div>
+
+
+
+    <div class="error-container">
+        <div class="title-error-container">
+            <h3>Error al cargar el examen</h3>
+            <img src="/assets/img/error-connection.svg" alt="Error de conexion">
+        </div>
+        <img class="icon-big" src="/assets/img/error-connection.svg" alt="Error de conexion">
+        <span>No se pudo generar el examen. Por favor, intenta nuevamente en unos minutos; si el problema persiste, reintenta más tarde.</span>
+        <div class="container-btn-error">
+            <button class="reload-connection-btn" onclick="reloadPage()">Reintentar</button>
+            <button class="back-course" onclick="window.location.href='/user/courses'">Volver a Cursos</button>
+        </div>
+
+    </div>
+    <script src="/assets/js/profile.js"></script>
+    <script src="/assets/js/fquiz-question.js"></script>
+</body>
+</html>

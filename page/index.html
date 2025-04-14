@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.1">
+    <title>StudyHub</title>
+    <link rel="stylesheet" href="/assets/css/index.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sriracha&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="assets/img/libro.png" alt="Logo de StudyHub">
+            <span>StudyHub</span>
+        
+        </div>
+
+        <div class="nav-center">
+            <nav>
+                <a href="#caracteristicas">Caracteristicas</a>
+                <a href="">Como funciona</a>
+                <a href="">Referencias</a>
+            </nav>
+        </div>
+
+        <div class="nav-actions">
+            <nav>
+                <a href="#login">Iniciar sesion</a>
+                <button type="button" >Registrarse</button>
+            </nav>
+        </div>
+    </header>
+
+    
+
+    <main>
+        <div class="content-main">
+            <h1>Preparate para tus examenes de manera inteligente</h1>
+            <p>Sube tus materias y bibliografia para generar examenes personalizados para practicar y dominar tus estudios</p>
+            <button class="comenzar" type="button">Comenzar ahora</button>
+            <button class="conocer" type="button">Conocer mas</button>
+        </div>
+        <div class="imagen-principal">
+            <img class="imagen-study" src="assets/img/study.jpg" alt="Imagend de un multiple choice">
+        </div>
+    </main>
+    <section class="caracteristicas" id="caracteristicas">
+        <div class="caracteristicas-titulos">
+            <div>Caracteristicas</div>
+            <h2>Todo lo que necesitas para aprobar</h2>
+            <span>Nuestra plataforma te ofrece herramientas para poner en practica tus conocimientos antes de un examen</span>
+        </div>
+        <div  class="caracteristicas-item">
+
+            <div class="item">
+                <img src="assets/img/book.svg" alt="materias">
+                <h4>Organiza tus materias</h4>
+                <p>Sube y organiza tus materias, su bibliografia en un solo lugar</p>
+            </div>
+            <div class="item">
+                <img src="assets/img/sheet.svg" alt="examenes">
+                <h4>Genera examenes</h4>
+                <p>Crea examenes personalizados con inteligencia artificila basada en tu material de estudio</p>
+            </div>
+            <div class="item">
+                <img src="assets/img/ok.svg" alt="retroalimentacion">
+                <h4>Devolucion de tu examen</h4>
+                <p>Revisa tus respuestas y recibe retroalimentación detallada sobre cada error, para fortalecer tu aprendizaje.</p>
+            </div>
+        </div>
+
+    </section>
+
+    <section class="login-container" id="login">
+
+        <div class="login-box">
+            <div class="message-login"></div>
+            <h2>Iniciar Sesión</h2>
+            <form id="login-form">
+                <div class="input-group">
+                    <label for="username">Usuario</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password"  name="password" required>
+                </div>
+                <div class="login-options">
+                    <button type="submit" >Iniciar Sesión</button>
+                    <p>¿No tienes cuenta? <a href="#">Regístrate</a></p>
+                </div>
+            </form>
+        </div>
+
+    </section>
+    <script src="/assets/js/index.js"></script>
+</body>
+</html>
