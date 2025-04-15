@@ -288,7 +288,7 @@ function loadingPage(infoDataExam){
                     divPage.style.display = 'none';
                 }
             }
-        },3000)
+        },3500)
     }
 }
 

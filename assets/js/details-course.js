@@ -54,7 +54,7 @@ function createTopics(dataTopics){
                 <h4>${topic.title}</h4>
                 <div class="card-icons">
                     <img src="/assets/img/write.svg" alt="editar tema" onclick="openModal('edit',this)">
-                    <img src="/assets/img/delete.svg" alt="eliminar" onclick="deleteTopic(this)">
+                    <img src="/assets/img/delete.svg" alt="eliminar" onclick="openModal('delete',this)">
                 </div>
             </div>
 
@@ -110,35 +110,29 @@ function switchContent(contentType, button) {
 
 
 function deleteTopic(element){
-    let respuesta = confirm("¿Estás seguro de que quieres eliminar este Tema? Esta acción no se puede deshacer.");
-
-    if(respuesta){
-        const topicCard = element.closest('.item-card');
-        const idTopic = topicCard.dataset.id;
-        const token = localStorage.getItem('token');
-        if (!token) {
-            window.location.href = "index.html";
-            return;
-        }
-        fetch(`http://localhost:8080/user/courses/${idCourse}/topics/${idTopic}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': token
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al eliminar el tema');
-            }
-            topicCard.remove();
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert("Error: No se pudo eliminar este tema.")
-        });
-    }else{
+    const topicCard = element.closest('.item-card');
+    const idTopic = topicCard.dataset.id;
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = "index.html";
         return;
     }
+    fetch(`http://localhost:8080/user/courses/${idCourse}/topics/${idTopic}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': token
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al eliminar el tema');
+        }
+        topicCard.remove();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert("Error: No se pudo eliminar este tema.")
+    });
 
 }
 

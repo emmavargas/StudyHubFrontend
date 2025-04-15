@@ -75,7 +75,7 @@ function createCourse(course){
             <h2>${course.title}</h2>
             <div class="card-icons">
                 <img src="/assets/img/write.svg" alt="editar curso" onclick="openModal('edit',this)">
-                <img src="/assets/img/delete.svg" alt="eliminar" onclick="deleteCourse(this)">
+                <img src="/assets/img/delete.svg" alt="eliminar" onclick="openModal('delete',this)">
             </div>
         </div>
 
@@ -100,35 +100,40 @@ function generateExam(element){
     window.location.href = `/user/courses/${idCourse}/exam-ai`;
 }
 
-function deleteCourse(element){
 
+
+function deleteCourse(element){
+    const courseCard = element.closest('.course-card');
+    const idCourse = courseCard.dataset.id;
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = "index.html";
+        return;
+    }
+    fetch(`http://localhost:8080/user/courses/${idCourse}`, {
+        method: 'DELETE',
+        headers: {
+            'Authorization': token
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Error al eliminar el curso');
+        }
+        courseCard.remove();
+    })
+    .catch(error => {
+        alert("Error: No se pudo eliminar el elemento.")
+    });
+
+
+/*
     let respuesta = confirm("¿Estás seguro de que quieres eliminar este Curso? Esta acción no se puede deshacer.");
     if(respuesta){
-        const courseCard = element.closest('.course-card');
-        const idCourse = courseCard.dataset.id;
-        const token = localStorage.getItem('token');
-        if (!token) {
-            window.location.href = "index.html";
-            return;
-        }
-        fetch(`http://localhost:8080/user/courses/${idCourse}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization': token
-            }
-        })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error('Error al eliminar el curso');
-            }
-            courseCard.remove();
-        })
-        .catch(error => {
-            alert("Error: No se pudo eliminar el elemento.")
-        });
+
     }
     else{
         return;
     }
-
+*/
 }

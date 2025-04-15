@@ -64,7 +64,7 @@ header .logo span {
     align-items: center;
     justify-content: center;
 }
-.nav-actions button {
+.nav-actions .register {
     background-color: black;
     color: white;
     padding: 10px 15px 10px 15px;
@@ -76,7 +76,7 @@ header .logo span {
     cursor: pointer;
     transition: background-color 0.3s;
 }
-button:hover {
+.nav-actions .register:hover {
     background-color: #333
 }
 
@@ -93,6 +93,85 @@ a{
     width: 30px;
     height: 30px;
 }
+
+
+.nav-actions-profile{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+}
+.nav-actions-profile .profile {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: whitesmoke;
+    color: rgb(0, 0, 0);
+    padding: 10px 15px 10px 15px;
+    margin: 5px 5px 5px 0px;
+    border-radius: 5px;
+    border: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    gap: 10px;
+}
+
+.nav-actions-profile .profile:hover {
+    background-color: #e7e7e7
+}
+
+.nav-actions-profile .profile img {
+    width: 15px;
+    height: 15px;
+}
+
+
+
+.nav-actions-profile .exit {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: whitesmoke;
+    color: rgb(233, 55, 55);
+    padding: 10px 15px 10px 15px;
+    margin: 5px 5px 5px 0px;
+    border-radius: 5px;
+    border: 0;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    gap: 10px;
+}
+.nav-actions-profile .exit:hover {
+    background-color: #f3e5e5
+}
+
+.nav-actions-profile .exit img {
+    width: 15px;
+    height: 15px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

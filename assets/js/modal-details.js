@@ -100,10 +100,24 @@ async function openModal(action, element) {
             handleEditFormSubmit(event, topicId);
         });
         formEdit.querySelector('.cancel').addEventListener('click', cancelClick);
-    
-
+    }else if(action === 'delete'){
+        modal.innerHTML = '';
+        const confirmation = document.createElement('div');
+        confirmation.classList.add('confirmation-delete-container')
+        confirmation.innerHTML =`
+            <h3>¿Estás seguro de que quieres eliminar este Tema? Esta acción no se puede deshacer.</h3>
+            <div class="confirmation">
+                <button class="delete-btn">Aceptar</button>
+                <button class="cancel-delete-btn">Cancelar</button>
+            </div>   
+        `
+        modal.appendChild(confirmation);
+        confirmation.querySelector('.delete-btn').addEventListener('click', ()=>{
+            deleteTopic(element);
+            closeModal();
+        })
+        confirmation.querySelector('.cancel-delete-btn').addEventListener('click', cancelClick);
     }
-
     
 }
 
@@ -171,7 +185,7 @@ async function createTopicCard(title, description, bibliography){
                     <h4>${data.title}</h4>
                     <div class="card-icons">
                         <img src="/assets/img/write.svg" alt="editar tema" onclick="openModal('edit',this)">
-                        <img src="/assets/img/delete.svg" alt="eliminar" onclick="deleteTopic(this)">
+                        <img src="/assets/img/delete.svg" alt="eliminar" onclick="openModal('delete',this)">
                     </div>
                 </div>
 

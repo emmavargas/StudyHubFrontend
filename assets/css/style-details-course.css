@@ -473,3 +473,65 @@ a{
     background-color: #f0f0f0;
 }
 
+
+.confirmation-delete-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: stretch;
+    background-color: white;
+    margin: 150px auto;
+    padding: 20px;
+    gap: 15px;
+    max-width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.confirmation-delete-container .confirmation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+}
+
+.confirmation-delete-container h3 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 10px 20px;
+    padding: 20px;
+}
+
+.confirmation .delete-btn {
+    padding: 10px 20px;
+    border-radius: 5px;
+    background-color: black;
+    color: white;
+    transition: background-color 0.3s;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    border: 0;
+}
+
+.confirmation .delete-btn:hover {
+    background-color: #302f2f;
+}
+
+
+.confirmation .cancel-delete-btn {
+    background-color: rgb(235, 235, 235);
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: black;
+    transition: background-color 0.3s;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    border: 0;
+}
+
+.confirmation .cancel-delete-btn:hover {
+    background-color: #f0f0f0;
+}
