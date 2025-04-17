@@ -43,8 +43,8 @@ form.addEventListener('submit', async(e) => {
     const password = document.querySelector('input[name="password"]').value;
 
     const loginData= {
-        username: "anonimo",
-        password: "12345678"
+        username: username,
+        password: password
     }
 
 
