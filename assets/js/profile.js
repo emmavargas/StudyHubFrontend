@@ -1,7 +1,7 @@
 
 async function logoutSesion() {
     try {
-        const response = await fetch('http://65.21.56.202:3000/logout', {
+        const response = await fetch('http://65.21.56.202:8080/logout', {
             method: 'POST',
             credentials: 'include'
         });
