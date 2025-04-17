@@ -2,11 +2,7 @@ const url = new URL(window.location.href);
 const urlParams = url.pathname.split('/').filter(segment => segment);
 const idCourse = urlParams.pop(); 
 
-document.addEventListener('DOMContentLoaded', () => {
-    const token = localStorage.getItem('token');
-    if(!token){
-        window.location.href = "http://localhost:3000";
-    }
+document.addEventListener('DOMContentLoaded', async() => {
 
     const titleCourse = document.getElementById('title-course');
     const bibliographyCourse = document.getElementById('bibliography-course');
@@ -14,29 +10,24 @@ document.addEventListener('DOMContentLoaded', () => {
     let dataCourse = null;
 
 
-
-    fetch(`http://localhost:8080/user/courses/${idCourse}`,{
-        method:'GET',
-        headers:{
-            'Authorization': token
-        }
-    })
-    .then(response => {
+    try{
+        const response = await fetch(`http://localhost:8080/user/courses/${idCourse}`,{
+            method:'GET',
+            credentials: 'include'
+        })
         if(!response.ok){
             throw new Error('Error en la solicitud de curso');
+
         }
-        return response.json();
-    })
-    .then(data =>{
+
+        const data = await response.json();
         titleCourse.innerHTML = data.title;
         bibliographyCourse.innerHTML = data.contentBibliography;
         topicsContainer.appendChild(createTopics(data));
-    })
-    .catch(error => {
+    }catch(error) {
         console.error('Error:', error);
         window.location.href = "/";
-    });
-
+    };
 });
 
 
@@ -85,9 +76,7 @@ function switchContent(contentType, button) {
     
     fetch(`http://localhost:8080/user/courses/${idCourse}/topics/${card.dataset.id}`, {
         method:'GET',
-        headers:{
-            'Authorization': localStorage.getItem('token')
-        }
+        credentials:'include'
     })
     .then(response => {
         if(!response.ok){
@@ -96,7 +85,6 @@ function switchContent(contentType, button) {
         return response.json();
     })
     .then(data => {
-        console.log(data);
         if (contentType === 'description') {
             paragraph.textContent = data.description;
         } else if (contentType === 'bibliography') {
@@ -111,17 +99,10 @@ function switchContent(contentType, button) {
 
 function deleteTopic(element){
     const topicCard = element.closest('.item-card');
-    const idTopic = topicCard.dataset.id;
-    const token = localStorage.getItem('token');
-    if (!token) {
-        window.location.href = "index.html";
-        return;
-    }
+
     fetch(`http://localhost:8080/user/courses/${idCourse}/topics/${idTopic}`, {
         method: 'DELETE',
-        headers: {
-            'Authorization': token
-        }
+        credentials: 'include'
     })
     .then(response => {
         if (!response.ok) {

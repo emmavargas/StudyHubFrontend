@@ -23,91 +23,69 @@ document.addEventListener('DOMContentLoaded', async() =>{
     percentConexionAi = 0;
     let courseExamen;
     flagIncremetCoount = false;
-    
-    const token = localStorage.getItem('token');
-    console.log(token);
-    if(!token){
-        window.location.href = "/";
-        return;
-    }else{
-        try{
-            loadingPage(-1);
-            const response = await fetch(`http://localhost:8080/user/courses/${idCourse}`, {
-                method: 'GET',
-                headers: {
-                    Authorization: token,
-                    'Content-Type': 'application/json'
-                },
-            });
 
-            if(!response.ok){
-                if (response.status === 403) {
-                    throw { name: 'ForbiddenError', status: response.status, message: 'Acceso denegado por token' };
-                } else {
-                    throw { name: 'HttpError', status: response.status, message: response.statusText };
-                }       
-            }
-            const dataCourse = await response.json();
-            const courseTile = dataCourse.course;
-            const topicsTitle = dataCourse.topics.map(topic => topic.title);
+    try{
+        const response = await fetch(`http://localhost:8080/user/courses/${idCourse}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials:'include'
+        });
 
-            courseExamen = {
-                course: courseTile,
-                topics: topicsTitle
-            };
+        if(!response.ok){
+            if (response.status === 403) {
+                throw { name: 'ForbiddenError', status: response.status, message: 'Acceso denegado por cookies' };
+            } else {
+                throw { name: 'HttpError', status: response.status, message: response.statusText };
+            }       
+        }
+        const dataCourse = await response.json();
+        const courseTile = dataCourse.course;
+        const topicsTitle = dataCourse.topics.map(topic => topic.title);
 
+        courseExamen = {
+            course: courseTile,
+            topics: topicsTitle
+        };
 
-            const responseExam = await fetch(`http://localhost:8080/user/courses/${idCourse}/generar-examen`, {
-                method: 'POST',
-                headers: {
-                    Authorization: token,
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(courseExamen)
-            })
-            if(!responseExam.ok){
-                if (responseExam.status === 403) {
-                    throw { name: 'ForbiddenError', status: 403, message: 'Acceso denegado por token' };
-                } else {
-                    throw { name: 'HttpError', status: responseExam.status, message: responseExam.statusText };
-                }            
-            }
+        const dataExam = await loadingPage(courseExamen);
 
-            const dataExam = await responseExam.json();
-            console.log('antes de la respuesta')
+        if(dataExam.status ===429){
+            throw { name: 'Too Many Requests', status: dataExam.status, message: 'Limite de solicitudes' };
+        }
+        else{
 
-            loadingPage(dataExam);
-            console.log('despues de la respuesta')
+        }
 
-            questionList = dataExam.items;
-            console.log(questionList)
+        questionList = dataExam.items;
+        
+        answerQuestionExam = questionList.map(item => {
+            let optionCorrect = -1;
+            const optionsArray = item.options;
             
-            answerQuestionExam = questionList.map(item => {
-                let optionCorrect = -1;
-                const optionsArray = item.options;
-                
-                for (let i = 0; i < optionsArray.length; i++) {
-                    if (optionsArray[i] === item.answer) {
-                        optionCorrect = i;
-                        break;
-                    }
+            for (let i = 0; i < optionsArray.length; i++) {
+                if (optionsArray[i] === item.answer) {
+                    optionCorrect = i;
+                    break;
                 }
-                return optionCorrect;
-            });
-            console.log(dataExam);
-            loadQuestion()
+            }
+            return optionCorrect;
+        });
+        loadQuestion()
 
 
-        }catch(error){
-            if(error.status === 403){
-                window.location.href='/'
-            }
-            else{
-                console.log("prueba")
-                ErrorConnectionAi();
-            }
+    }catch(error){
+        if(error.status === 403){
+            window.location.href='/'
+        }else if(error.status ===429){
+            toManyRequest();
+        }
+        else{
+            ErrorConnectionAi();
         }
     }
+    
 });
 
 function loadQuestion(){
@@ -250,45 +228,66 @@ function compareResult(){
             resultAnswer.push(0);
         }
     }
-    console.log(answerQuestionUser);
-    console.log(answerQuestionExam);
-    console.log(resultAnswer);
     return resultAnswer;
 }
 
 
-function loadingPage(infoDataExam){
-    if(infoDataExam==-1){
-        const progressBarValue = document.getElementById('progress-bar-ai');
-        const informationProgress = document.querySelector('.information-connection-ai');
-        let contador =0;
-        textProgress = ["Conectando con IA...","Analizando datos...","Generando preguntas...","Creando examen...","¡Todo listo!"];
-        informationProgress.textContent=textProgress[contador];
-        informationProgress.style.transform = 'translateY(0)';
-        informationProgress.style.opacity ='1';
-        contador = contador +1;
-        const interval = setInterval(()=>{
-            percentConexionAi = percentConexionAi +25;
-            progressBarValue.style.setProperty('--progress', `${percentConexionAi}%`)
-            informationProgress.textContent=textProgress[contador];
+async function loadingPage(courseExamen){
+    
+    let contador =0;
+    const progressBarValue = document.getElementById('progress-bar-ai');
+    const informationProgress = document.querySelector('.information-connection-ai');
+    textProgress = ["Conectando con IA...","Analizando datos...","Generando preguntas...","Creando examen...","¡Todo listo!"];
+
+
+    function animarPantallaCarga() {
+        return new Promise(resolve => {
+            informationProgress.textContent = textProgress[contador];
             informationProgress.style.transform = 'translateY(0)';
-            informationProgress.style.opacity ='1';
-            
-            contador = contador+1;
-            if(contador ===6){
-                clearInterval(interval);
-                const divLoading = document.getElementById('loading');
-                const divPage = document.getElementById('page-load');
-            
-                if(infoDataExam){
-                    divLoading.style.display = 'none';
-                    divPage.style.display = 'flex';
-                }else{
-                    divLoading.style.display = 'flex'
-                    divPage.style.display = 'none';
+            informationProgress.style.opacity = '1';
+            contador++;
+
+            const interval = setInterval(() => {
+                percentConexionAi += 25;
+                progressBarValue.style.setProperty('--progress', `${percentConexionAi}%`);
+                if (contador < textProgress.length) {
+                    informationProgress.textContent = textProgress[contador];
+                    informationProgress.style.transform = 'translateY(0)';
+                    informationProgress.style.opacity = '1';
+                    contador++;
+                } else {
+                    clearInterval(interval);
+                    resolve();
                 }
-            }
-        },3500)
+            }, 3500);
+        });
+    }
+    const animation = animarPantallaCarga();
+
+    const responseExam = fetch(`http://localhost:8080/user/courses/${idCourse}/generar-examen`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(courseExamen),
+        credentials:'include'
+    })
+
+    const responseInvalidTime =await responseExam;
+    if(responseInvalidTime.status===429){
+        return responseExam;
+    }
+
+    const [response] = await Promise.all([responseExam, animation])
+    const divLoading = document.getElementById('loading');
+    const divPage = document.getElementById('page-load');
+
+    if(response.status === 200){
+        divLoading.style.display = 'none'
+        divPage.style.display = 'flex';
+        return response.json();
+    }else{
+        return response;
     }
 }
 
@@ -338,13 +337,52 @@ function ErrorConnectionAi(){
     const divPage = document.getElementById('page-load');
     const divResult = document.getElementById('result-container');
     const divError = document.querySelector('.error-container');
-
     divLoading.style.display = 'none';
     divPage.style.display = 'none';
     divResult.style.display = 'none';
     divError.style.display = 'flex';
+
+    divError.innerHTML = `
+        <div class="title-error-container">
+            <h3>Error al cargar el examen</h3>
+            <img src="/assets/img/error-connection.svg" alt="Error de conexion">
+        </div>
+        <img class="icon-big" src="/assets/img/error-connection.svg" alt="Error de conexion">
+        <span>No se pudo generar el examen. Por favor, intenta nuevamente en unos minutos; si el problema persiste, reintenta más tarde.</span>
+        <div class="container-btn-error">
+            <button class="reload-connection-btn" onclick="reloadPage()">Reintentar</button>
+            <button class="back-course" onclick="window.location.href='/user/courses'">Volver a Cursos</button>
+        </div>
+    `
+
+
 }
 
+
+function toManyRequest(){
+    const divLoading = document.getElementById('loading');
+    const divPage = document.getElementById('page-load');
+    const divResult = document.getElementById('result-container');
+    const divError = document.querySelector('.error-container');
+    divLoading.style.display = 'none';
+    divPage.style.display = 'none';
+    divResult.style.display = 'none';
+    divError.style.display = 'flex';
+    
+    divError.innerHTML = `
+        <div class="title-error-container">
+            <h3>Error al cargar el examen</h3>
+            <img src="/assets/img/error-connection.svg" alt="Error de conexion">
+        </div>
+        <img class="icon-big" src="/assets/img/error-connection.svg" alt="Error de conexion">
+        <span>Has alcanzado el límite gratuito de exámenes diarios. Podrás realizar más exámenes en 30 minutos.</span>
+        <div class="container-btn-error">
+            <button class="reload-connection-btn" onclick="reloadPage()">Reintentar</button>
+            <button class="back-course" onclick="window.location.href='/user/courses'">Volver a Cursos</button>
+        </div>
+    `
+}
+    
 function reloadPage(){
     window.location.href = `/user/courses/${idCourse}/exam-ai`
 }

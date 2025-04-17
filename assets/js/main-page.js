@@ -1,35 +1,31 @@
-document.addEventListener("DOMContentLoaded", function (){
-   const token =localStorage.getItem('token');
+document.addEventListener("DOMContentLoaded", async function (){
 
-   if(!token){
-       window.location.href = "http://localhost:3000";
-   }
-   else{
-       fetch("http://localhost:8080/user/courses",{
-           method:'GET',
-           headers:{
-               'Authorization': token
-           }
-       })
-       .then(response => {
-           if(!response.ok){
-               throw new Error('token invalido');
-           }
-           return response.json();
-       })
-       .then(data => {
-           loadCourse(data);
-       })
-        .catch(error => {
-            console.log(error);
-            window.location.href = "http://localhost:3000";
+    try {
+        const response = await fetch('http://localhost:8080/user/courses',{
+            method: 'GET',
+            credentials: 'include'
         });
+        if(!response.ok){
+            window.location.href = "/";
 
-   }
+        }else{
+            const data = await response.json();
+            loadCourse(data);
+        }
+    }catch(error){
+        console.log('error',  error)
+        window.location.href = "/";
+
+    }
+
 });
 
 function loadCourse(data){
 
+    if (!Array.isArray(data)) {
+        console.error('Error: data no es un arreglo', data);
+        return;
+    }
     const container = document.querySelector('.courses-container');
     data.forEach(
         course => {
@@ -102,38 +98,21 @@ function generateExam(element){
 
 
 
-function deleteCourse(element){
+async function deleteCourse(element){
     const courseCard = element.closest('.course-card');
     const idCourse = courseCard.dataset.id;
-    const token = localStorage.getItem('token');
-    if (!token) {
-        window.location.href = "index.html";
-        return;
-    }
-    fetch(`http://localhost:8080/user/courses/${idCourse}`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': token
-        }
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error al eliminar el curso');
+
+
+    try{
+        const response = await fetch(`ttp://localhost:8080/user/courses/${idCourse}`,{
+            method: 'DELETE',
+            credentials: 'include'
+        });
+        if(!response.ok){
+            //window.location.href = '/';
         }
         courseCard.remove();
-    })
-    .catch(error => {
+    }catch(error){
         alert("Error: No se pudo eliminar el elemento.")
-    });
-
-
-/*
-    let respuesta = confirm("¿Estás seguro de que quieres eliminar este Curso? Esta acción no se puede deshacer.");
-    if(respuesta){
-
-    }
-    else{
-        return;
-    }
-*/
+    };
 }

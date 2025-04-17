@@ -158,24 +158,18 @@ async function handleCreateFormSubmit(event){
 async function createTopicCard(title, description, bibliography){
     const topicCard = document.createElement('div');
     topicCard.classList.add('item-card');
-    const token = localStorage.getItem('token');
-    if (!token) {
-        window.location.href = "index.html";
-        console.error('Token no encontrado');
-        return topicCard;
-    }
     try{
         const response = await fetch (`http://localhost:8080/user/courses/${idCourse}/topics`, {
             method: 'POST',
             headers:{
-                'Authorization': token,
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
                 title: title,
                 description: description,
                 bibliography: bibliography
-            })
+            }),
+            credentials:'include'
         });
         const data = await response.json();
         if(data && data.id){
@@ -211,17 +205,10 @@ async function createTopicCard(title, description, bibliography){
 
 async function getDataTopic(idTopic){
     let dataTopic={};
-    const token = localStorage.getItem('token');
-    if (!token) {
-        console.error('Token no encontrado');
-        return dataTopic;
-    }
     try{
         const response = await fetch(`http://localhost:8080/user/courses/${idCourse}/topics/${idTopic}`, {
             method:'GET',
-            headers:{
-                'Authorization': token
-            }
+            credentials:'include'
         });
         if(!response.ok){
             throw new Error('Error en la solicitud de tema');
@@ -246,19 +233,15 @@ async function handleEditFormSubmit(event, idTopic){
         description: description,
         bibliography: bibliography
     };
-    const token = localStorage.getItem('token');
-    if(!token){
-        console.error('Token no encontrado');
-        return;
-    }
+
     try{
         const response = await fetch(`http://localhost:8080/user/courses/${idCourse}/topics/${idTopic}`,{
             method: 'PUT',
             headers:{
-                Authorization: token,
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(dataTopic)
+            body: JSON.stringify(dataTopic),
+            credentials:'include'
         })
 
         if (!response.ok) {

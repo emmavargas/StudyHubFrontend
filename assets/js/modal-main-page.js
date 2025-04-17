@@ -152,28 +152,22 @@ async function handleCreateFormSubmit(event) {
 async function createCourseCard(title, bibliography) {
     const courseCard = document.createElement('div');
     courseCard.classList.add('course-card');
-    const token = localStorage.getItem('token');
-    if (!token) {
-        window.location.href = "index.html";
-        return courseCard;
-    }
     try {
         const response = await fetch('http://localhost:8080/user/courses', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': token
             },
             body: JSON.stringify({
                 title: title,
                 contentBibliography: bibliography
-            })
+            }),
+            credentials:'include'
         });
         if (!response.ok) {
-            throw new Error('token invalido o error en el servidor');
+            throw new Error('cookies invalido o error en el servidor');
         }
         const data = await response.json();
-        console.log('Respuesta del POST:', data);
         if (data && data.id) {
             courseCard.dataset.id = data.id;
             courseCard.innerHTML = `
@@ -212,6 +206,7 @@ async function createCourseCard(title, bibliography) {
 
     } catch (error) {
         console.error('Error en POST:', error);
+        window.location.href = "/";
     }
     return courseCard;
 }
@@ -219,25 +214,19 @@ async function createCourseCard(title, bibliography) {
 
 async function getDataCourse(idCourse) {
     let dataCourse = {};
-    const token = localStorage.getItem('token');
-
-    if (!token) {
-        console.error('Token no encontrado');
-        return dataCourse;
-    }
-
     try {
         const response = await fetch(`http://localhost:8080/user/courses/${idCourse}`, {
             method: 'GET',
             headers: {
                 //quedo sobrante=?
                 'Content-Type': 'application/json',
-                'Authorization': token
-            }
+            },
+            credentials:'include'
         });
 
         if (!response.ok) {
             throw new Error(`Error en la respuesta: ${response.status} - ${response.statusText}`);
+
         }
 
         dataCourse = await response.json();
@@ -264,9 +253,9 @@ async function handleEditFormSubmit(event, idCourse){
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': localStorage.getItem('token')
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify(data),
+        credentials: 'include'
     });
     const dataResponse = await response.json();
     const card = document.querySelector(`[data-id="${idCourse}"]`)
