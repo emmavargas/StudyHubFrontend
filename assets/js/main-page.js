@@ -109,7 +109,7 @@ async function deleteCourse(element){
             credentials: 'include'
         });
         if(!response.ok){
-            //window.location.href = '/';
+            window.location.href = '/';
         }
         courseCard.remove();
     }catch(error){
