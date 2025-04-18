@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async() => {
 
 
     try{
-        const response = await fetch(`http://65.21.56.202:8080/user/courses/${idCourse}`,{
+        const response = await fetch(`http://localhost:8080/user/courses/${idCourse}`,{
             method:'GET',
             credentials: 'include'
         })
@@ -74,7 +74,7 @@ function switchContent(contentType, button) {
     
     const paragraph = card.querySelector('p');
     
-    fetch(`http://65.21.56.202:8080/user/courses/${idCourse}/topics/${card.dataset.id}`, {
+    fetch(`http://localhost:8080/user/courses/${idCourse}/topics/${card.dataset.id}`, {
         method:'GET',
         credentials:'include'
     })
@@ -100,7 +100,7 @@ function switchContent(contentType, button) {
 function deleteTopic(element){
     const topicCard = element.closest('.item-card');
 
-    fetch(`http://65.21.56.202:8080/user/courses/${idCourse}/topics/${idTopic}`, {
+    fetch(`http://localhost:8080/user/courses/${idCourse}/topics/${idTopic}`, {
         method: 'DELETE',
         credentials: 'include'
     })

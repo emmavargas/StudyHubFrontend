@@ -159,7 +159,7 @@ async function createTopicCard(title, description, bibliography){
     const topicCard = document.createElement('div');
     topicCard.classList.add('item-card');
     try{
-        const response = await fetch (`http://65.21.56.202:8080/user/courses/${idCourse}/topics`, {
+        const response = await fetch (`http://localhost:8080/user/courses/${idCourse}/topics`, {
             method: 'POST',
             headers:{
                 'Content-Type': 'application/json'
@@ -206,7 +206,7 @@ async function createTopicCard(title, description, bibliography){
 async function getDataTopic(idTopic){
     let dataTopic={};
     try{
-        const response = await fetch(`http://65.21.56.202:8080/user/courses/${idCourse}/topics/${idTopic}`, {
+        const response = await fetch(`http://localhost:8080/user/courses/${idCourse}/topics/${idTopic}`, {
             method:'GET',
             credentials:'include'
         });
@@ -235,7 +235,7 @@ async function handleEditFormSubmit(event, idTopic){
     };
 
     try{
-        const response = await fetch(`http://65.21.56.202:8080/user/courses/${idCourse}/topics/${idTopic}`,{
+        const response = await fetch(`http://localhost:8080/user/courses/${idCourse}/topics/${idTopic}`,{
             method: 'PUT',
             headers:{
                 'Content-Type': 'application/json'

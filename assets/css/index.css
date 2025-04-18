@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 html {
     scroll-behavior: smooth;
 }
@@ -7,7 +12,7 @@ body {
     flex-direction: column;
     min-height: 100vh;
     margin: 0;
-    background-color: whitesmoke;
+    background-color: white;
 }
 
 header {
@@ -22,7 +27,7 @@ header {
     left: 0;
     right: 0;
     z-index: 1000;
-    background-color: whitesmoke;
+    background-color: white;
 
 }
 
@@ -153,23 +158,6 @@ a{
     width: 15px;
     height: 15px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -462,3 +450,4 @@ section {
     margin-top: 10px;
     text-align: center;
 }
+

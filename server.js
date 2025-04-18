@@ -14,8 +14,17 @@ app.get('/', (req, res) => {
 });
 
 app.get('/how-it-works', (req, res) => {
-    console.log('Ruta /how-it-works solicitada');
     res.sendFile(path.join(__dirname, 'page', 'how-it-works.html'));
+    
+});
+
+app.get('/register', (req, res) => {
+    res.sendFile(path.join(__dirname, 'page', 'register.html'));
+    
+});
+
+app.get('/reference', (req, res) => {
+    res.sendFile(path.join(__dirname, 'page', 'reference.html'));
     
 });
 
