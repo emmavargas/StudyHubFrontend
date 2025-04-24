@@ -4,7 +4,7 @@ let isAuthenticated = false;
 
 function startedApp() {
     if (isAuthenticated) {
-        window.location.href = '/main';
+        window.location.href = '/user/courses';
     } else {
         document.querySelector('#login').scrollIntoView({ behavior: 'smooth' });
     }

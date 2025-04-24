@@ -37,11 +37,11 @@ header {
 .header-container {
     display: flex;
     align-items: center;
-    justify-content: space-between; 
-    max-width: 1600px;
+    justify-content: space-between;
+    max-width: 1600px; 
     width: 100%;
     margin: 0 auto;
-    padding: 0 115px; 
+    padding: 0 20px; 
 }
 
 header .logo span {
@@ -148,13 +148,13 @@ a {
 .main-container {
     max-width: 1600px;
     margin-top: 110px;
-    padding: 0px 115px;
+    padding: 0 20px; 
     display: flex;
-    margin-right: auto;
-    margin-left: auto;
+    margin: 0 auto; 
     flex-direction: column;
     min-height: 100%;
     padding-bottom: 50px;
+    width: 100%;
 }
 
 .back-course {
@@ -527,7 +527,6 @@ a {
 .confirmation .cancel-delete-btn:hover {
     background-color: #f0f0f0;
 }
-
 
 
 @media (max-width: 768px) {
