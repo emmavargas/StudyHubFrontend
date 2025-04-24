@@ -153,7 +153,7 @@ async function createCourseCard(title, bibliography) {
     const courseCard = document.createElement('div');
     courseCard.classList.add('course-card');
     try {
-        const response = await fetch('http://localhost:8080/user/courses', {
+        const response = await fetch('http://65.21.56.202:8080/user/courses', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -215,7 +215,7 @@ async function createCourseCard(title, bibliography) {
 async function getDataCourse(idCourse) {
     let dataCourse = {};
     try {
-        const response = await fetch(`http://localhost:8080/user/courses/${idCourse}`, {
+        const response = await fetch(`http://65.21.56.202:8080/user/courses/${idCourse}`, {
             method: 'GET',
             headers: {
                 //quedo sobrante=?
@@ -249,7 +249,7 @@ async function handleEditFormSubmit(event, idCourse){
         title: title,
         contentBibliography: bibliography
     }
-    const response = await fetch(`http://localhost:8080/user/courses/${idCourse}`, {
+    const response = await fetch(`http://65.21.56.202:8080/user/courses/${idCourse}`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',

@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function (){
 
     try {
-        const response = await fetch('http://localhost:8080/user/courses',{
+        const response = await fetch('http://65.21.56.202:8080/user/courses',{
             method: 'GET',
             credentials: 'include'
         });
@@ -104,7 +104,7 @@ async function deleteCourse(element){
 
 
     try{
-        const response = await fetch(`http://localhost:8080/user/courses/${idCourse}`,{
+        const response = await fetch(`http://65.21.56.202:8080/user/courses/${idCourse}`,{
             method: 'DELETE',
             credentials: 'include'
         });
