@@ -1,9 +1,9 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
 }
+
 html {
     scroll-behavior: smooth;
 }
@@ -19,7 +19,7 @@ body {
 header {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px darkgray solid;
@@ -29,7 +29,17 @@ header {
     right: 0;
     z-index: 1000;
     background-color: white;
+    width: 100%;
+}
 
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1400px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px; 
 }
 
 header .logo span {
@@ -37,14 +47,12 @@ header .logo span {
     font-weight: 700;
 }
 
-.logo{
+.logo {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
 }
-
-
 
 .nav-center {
     display: flex;
@@ -55,7 +63,6 @@ header .logo span {
 .nav-center nav {
     display: flex;
     gap: 15px;
-
 }
 
 .nav-actions {
@@ -70,10 +77,11 @@ header .logo span {
     align-items: center;
     justify-content: center;
 }
+
 .nav-actions .register {
     background-color: black;
     color: white;
-    padding: 10px 15px 10px 15px;
+    padding: 10px 15px;
     margin: 5px 5px 5px 0px;
     border-radius: 5px;
     border: 0;
@@ -82,11 +90,12 @@ header .logo span {
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 .nav-actions .register:hover {
-    background-color: #333
+    background-color: #333;
 }
 
-a{
+a {
     text-decoration: none;
     color: black;
     font-family: 'Inter', sans-serif;
@@ -94,26 +103,25 @@ a{
     font-size: 15px;
 }
 
-
 .logo img {
     width: 30px;
     height: 30px;
 }
 
-
-.nav-actions-profile{
+.nav-actions-profile {
     display: flex;
     gap: 10px;
     align-items: center;
     justify-content: center;
 }
+
 .nav-actions-profile .profile {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     background-color: whitesmoke;
     color: rgb(0, 0, 0);
-    padding: 10px 15px 10px 15px;
+    padding: 10px 15px;
     margin: 5px 5px 5px 0px;
     border-radius: 5px;
     border: 0;
@@ -125,7 +133,7 @@ a{
 }
 
 .nav-actions-profile .profile:hover {
-    background-color: #e7e7e7
+    background-color: #e7e7e7;
 }
 
 .nav-actions-profile .profile img {
@@ -133,15 +141,13 @@ a{
     height: 15px;
 }
 
-
-
 .nav-actions-profile .exit {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     background-color: whitesmoke;
     color: rgb(233, 55, 55);
-    padding: 10px 15px 10px 15px;
+    padding: 10px 15px;
     margin: 5px 5px 5px 0px;
     border-radius: 5px;
     border: 0;
@@ -151,18 +157,15 @@ a{
     transition: background-color 0.3s;
     gap: 10px;
 }
+
 .nav-actions-profile .exit:hover {
-    background-color: #f3e5e5
+    background-color: #f3e5e5;
 }
 
 .nav-actions-profile .exit img {
     width: 15px;
     height: 15px;
 }
-
-
-
-
 
 main {
     display: flex;
@@ -172,12 +175,11 @@ main {
     max-width: 1400px;
     flex: 1;
     min-height: 100vh;
+    padding: 0 20px; 
 }
-
 
 .content-main {
     min-width: 50%;
-
 }
 
 .content-main h1 {
@@ -188,40 +190,40 @@ main {
     margin-bottom: 15px;
     padding-right: 60px;
 }
+
 .content-main p {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 20px;
     padding-right: 50px;
-
     margin: 0px;
     color: rgb(151, 148, 148);
 }
 
 .content-main .comenzar {
-
     background-color: black;
     color: white;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 15px;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 20px;
     margin: 15px 5px 5px 0px;
     border-radius: 5px;
     border: 0;
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 .comenzar:hover {
-    background-color: #333
+    background-color: #333;
 }
 
-.content-main .conocer{
+.content-main .conocer {
     background-color: white;
     font-family: 'Inter', sans-serif;
     font-weight: 600;
     font-size: 15px;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 20px;
     margin: 15px 5px 5px 0px;
     border-radius: 5px;
     border: 0.5px solid rgb(219, 218, 218);
@@ -233,13 +235,9 @@ main {
     background-color: rgb(236, 234, 234);
 }
 
-
-
-
 .imagen-principal {
     min-width: 50%;
 }
-
 
 .imagen-study {
     display: block;
@@ -249,12 +247,11 @@ main {
     height: 80%;
 }
 
-
 section {
     margin: 0;
 }
 
-.caracteristicas{
+.caracteristicas {
     background-color: #f0f0f0;
     display: flex;
     flex-direction: column;
@@ -262,7 +259,7 @@ section {
     justify-content: center;
     padding-top: 150px;
     padding-bottom: 150px;
-    overflow: hidden;  
+    overflow: hidden;
 }
 
 .caracteristicas .caracteristicas-titulos {
@@ -271,7 +268,6 @@ section {
     align-items: center;
     justify-content: center;
     margin-bottom: 25px;
-
 }
 
 .caracteristicas .caracteristicas-titulos h2 {
@@ -289,18 +285,15 @@ section {
     background-color: black;
     border-radius: 10px;
     margin-bottom: 15px;
-    padding: 5px 10px 5px 10px;
+    padding: 5px 10px;
 }
 
-.caracteristicas .caracteristicas-titulos span{
+.caracteristicas .caracteristicas-titulos span {
     color: rgb(151, 148, 148);
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 20px;
 }
-
-
-
 
 .caracteristicas-item {
     display: flex;
@@ -311,8 +304,7 @@ section {
     gap: 20px;
 }
 
-
-.caracteristicas-item .item{
+.caracteristicas-item .item {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -342,10 +334,8 @@ section {
     margin: 0px;
     text-align: center;
     color: rgb(151, 148, 148);
-    padding: 0px 20px 0px 20px;
+    padding: 0px 20px;
 }
-
-
 
 .login-container {
     display: flex;
@@ -354,10 +344,9 @@ section {
     flex-direction: column;
     min-width: 100%;
     background-color: white;
-
 }
 
-.login-container .login-box{
+.login-container .login-box {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -370,7 +359,6 @@ section {
     margin-top: 200px;
     margin-bottom: 200px;
 }
-
 
 .login-container .login-box h2 {
     text-align: center;
@@ -388,6 +376,7 @@ section {
     justify-content: center;
     width: 100%;
 }
+
 .login-container .login-box .input-group label {
     display: block;
     font-size: 15px;
@@ -400,16 +389,13 @@ section {
 
 .login-container .login-box .input-group input {
     border-radius: 20px;
-    padding: 5px 10px 5px 10px;
+    padding: 5px 10px;
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 15px;
 }
 
-
-
-
-.login-container .login-box .login-options{
+.login-container .login-box .login-options {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -424,7 +410,7 @@ section {
     font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 15px;
-    padding: 10px 20px 10px 20px;
+    padding: 10px 20px;
     margin: 15px 5px 5px 0px;
     border-radius: 5px;
     border: 0;
@@ -433,7 +419,7 @@ section {
 }
 
 .login-container .login-box .login-options button:hover {
-    background-color: #333
+    background-color: #333;
 }
 
 .login-container .login-box .login-options p {
@@ -454,13 +440,12 @@ section {
 }
 
 
-
 @media (max-width: 768px) {
     *{
         text-align: center;
     }
 
-    header {
+    header .header-container{
         display: flex;
         flex-direction: column;
 

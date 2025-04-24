@@ -11,14 +11,12 @@
     <title>StudyHub</title>
 </head>
 <body>
-
-        <header>
+    <header>
+        <div class="header-container">
             <div class="logo">
                 <img src="/assets/img/libro.png" alt="Logo de StudyHub">
                 <a href="/"><span>StudyHub</span></a>
-            
             </div>
-    
             <div class="nav-center">
                 <nav>
                     <a href="#caracteristicas">Caracteristicas</a>
@@ -26,7 +24,6 @@
                     <a href="/reference">Referencias</a>
                 </nav>
             </div>
-    
             <div class="nav-actions">
                 <nav>
                     <button class="profile" type="button" onclick="window.location.href='/user/courses'">
@@ -39,31 +36,26 @@
                     </button>            
                 </nav>
             </div>
-        </header>
+        </div>
+    </header>
 
-        <main class="main-container"> 
-
-            <div class="title-add-container">
-                <h1>Mis Cursos</h1>
-
-                <button onclick="openModal('create')">
+    <main class="main-container"> 
+        <div class="title-add-container">
+            <h1>Mis Cursos</h1>
+            <button onclick="openModal('create')">
                 <img src="/assets/img/add.svg" alt="agregar curso">
                 <span>Nuevo Curso</span>
-                </button>
-            </div>
-    
-            <div class="courses-container">
-                <div class="courses-row"></div>
-            </div>
+            </button>
+        </div>
+        <div class="courses-container">
+            <div class="courses-row"></div>
+        </div>
+    </main>
 
-        </main>
-
-        <div class="modal"></div>
-
+    <div class="modal"></div>
 
     <script src="/assets/js/main-page.js"></script>
     <script src="/assets/js/modal-main-page.js"></script>
     <script src="/assets/js/profile.js"></script>
-
 </body>
 </html>

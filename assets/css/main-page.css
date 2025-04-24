@@ -19,7 +19,7 @@ body {
 header {
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
     padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px darkgray solid;
@@ -29,7 +29,15 @@ header {
     right: 0;
     z-index: 1000;
     background-color: whitesmoke;
+    width: 100%;
+}
 
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    width: 100%;
+    padding: 0 115px; 
 }
 
 header .logo span {
@@ -37,14 +45,12 @@ header .logo span {
     font-weight: 700;
 }
 
-.logo{
+.logo {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
 }
-
-
 
 .nav-center {
     display: flex;
@@ -55,7 +61,6 @@ header .logo span {
 .nav-center nav {
     display: flex;
     gap: 15px;
-
 }
 
 .nav-actions {
@@ -63,19 +68,21 @@ header .logo span {
     align-items: center;
     justify-content: flex-end;
 }
+
 .nav-actions nav {
     display: flex;
     gap: 10px;
     align-items: center;
     justify-content: center;
 }
+
 .nav-actions .profile {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     background-color: whitesmoke;
     color: rgb(0, 0, 0);
-    padding: 10px 15px 10px 15px;
+    padding: 10px 15px;
     margin: 5px 5px 5px 0px;
     border-radius: 5px;
     border: 0;
@@ -87,7 +94,7 @@ header .logo span {
 }
 
 .nav-actions .profile:hover {
-    background-color: #e7e7e7
+    background-color: #e7e7e7;
 }
 
 .nav-actions .profile img {
@@ -95,15 +102,13 @@ header .logo span {
     height: 15px;
 }
 
-
-
 .nav-actions .exit {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     background-color: whitesmoke;
     color: rgb(233, 55, 55);
-    padding: 10px 15px 10px 15px;
+    padding: 10px 15px;
     margin: 5px 5px 5px 0px;
     border-radius: 5px;
     border: 0;
@@ -113,8 +118,9 @@ header .logo span {
     transition: background-color 0.3s;
     gap: 10px;
 }
+
 .nav-actions .exit:hover {
-    background-color: #f3e5e5
+    background-color: #f3e5e5;
 }
 
 .nav-actions .exit img {
@@ -122,9 +128,7 @@ header .logo span {
     height: 15px;
 }
 
-
-
-a{
+a {
     text-decoration: none;
     color: black;
     font-family: 'Inter', sans-serif;
@@ -132,12 +136,10 @@ a{
     font-size: 15px;
 }
 
-
 .logo img {
     width: 30px;
     height: 30px;
 }
-
 
 .main-container {
     min-height: 100%;
@@ -208,24 +210,21 @@ a{
     flex-direction: column;
     justify-content: flex-start;
     border: 1px solid lightgray;
-    padding: 20px 20px;
+    padding: 20px;
     border-radius: 5px;
     max-width: 500px;
     width: 100%;
     margin: 0;
     gap: 30px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para efecto flotante */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s;
 }
 
 .course-card:hover {
-    transform: scale(1.02); /* Efecto de aumento al pasar el mouse */
+    transform: scale(1.02);
 }
 
-
-
-
-.course-card .title-card{
+.course-card .title-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -236,15 +235,15 @@ a{
     font-size: 20px;
     font-weight: 600;
     font-family: 'Inter', sans-serif;
-
 }
 
-.course-card .title-card .card-icons{
+.course-card .title-card .card-icons {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
 }
+
 .course-card .title-card img {
     width: 30px;
     height: 30px;
@@ -253,19 +252,18 @@ a{
     padding: 5px;
     cursor: pointer;
     transition: background-color 0.3s;
-
 }
+
 .course-card .title-card img:hover {
-    background-color:rgb(236, 236, 236);
+    background-color: rgb(236, 236, 236);
 }
 
-.course-card span{
+.course-card span {
     font-size: 15px;
     font-weight: 500;
     font-family: 'Inter', sans-serif;
     color: rgb(138, 138, 138);
 }
-
 
 .action-card {
     display: flex;
@@ -291,23 +289,19 @@ a{
     background-color: #f0f0f0;
 }
 
-
-
-
 .modal {
-    display: none; 
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    z-index: 1001; 
-    overflow: auto; 
+    z-index: 1001;
+    overflow: auto;
     opacity: 0;
     transition: opacity 0.3s ease;
 }
-
 
 .creation-modal {
     display: flex;
@@ -347,7 +341,7 @@ a{
 
 .creation-modal p {
     font-weight: 400;
-    color:rgb(138, 138, 138);
+    color: rgb(138, 138, 138);
     font-size: 14px;
 }
 
@@ -378,12 +372,10 @@ a{
     border-color: rgb(102, 100, 100);
 }
 
-
-
-.options-add-close{
+.options-add-close {
     display: flex;
     align-items: center;
-    justify-content:flex-end;
+    justify-content: flex-end;
     width: 100%;
     gap: 10px;
 }
@@ -404,6 +396,7 @@ a{
 .options-add-close .create:hover {
     background-color: #313030;
 }
+
 .options-add-close .cancel {
     background-color: rgb(235, 235, 235);
     color: black;
@@ -416,13 +409,10 @@ a{
     cursor: pointer;
     transition: background-color 0.3s;
 }
+
 .options-add-close .cancel:hover {
     background-color: #f0f0f0;
 }
-
-
-
-
 
 .confirmation-delete-container {
     display: flex;
@@ -447,7 +437,7 @@ a{
 .confirmation-delete-container h3 {
     font-family: 'Inter', sans-serif;
     font-weight: 600;
-    font-size: 10px 20px;
+    font-size: 20px;
     padding: 20px;
 }
 
@@ -467,7 +457,6 @@ a{
 .confirmation .delete-btn:hover {
     background-color: #302f2f;
 }
-
 
 .confirmation .cancel-delete-btn {
     background-color: rgb(235, 235, 235);
@@ -495,7 +484,7 @@ a{
         width: 100%;
     }
 
-    header {
+    header .header-container{
         display: flex;
         flex-direction: column;
 
