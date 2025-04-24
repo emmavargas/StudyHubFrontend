@@ -2,6 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
 }
 
 html {
@@ -12,6 +13,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    width: 100%;
     margin: 0;
     background-color: white;
 }
@@ -19,7 +21,7 @@ body {
 header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center; /* Changed from space-around to center for .header-container */
     padding-top: 15px;
     padding-bottom: 15px;
     border-bottom: 1px darkgray solid;
@@ -29,21 +31,20 @@ header {
     right: 0;
     z-index: 1000;
     background-color: white;
-    width: 100%;
+    width: 100%; /* Ensure full width for fixed header */
 }
 
 .header-container {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    max-width: 1600px; 
+    justify-content: space-between; /* Distribute logo, nav, and actions like Index */
+    max-width: 1600px; /* Match Index */
     width: 100%;
     margin: 0 auto;
-    padding: 0 20px;
+    padding: 0 20px; /* Match Index */
 }
 
 header .logo span {
-    font-family: 'Inter', sans-serif;
     font-weight: 700;
 }
 
@@ -85,7 +86,6 @@ header .logo span {
     margin: 5px 5px 5px 0px;
     border-radius: 5px;
     border: 0;
-    font-family: 'Inter', sans-serif;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -98,7 +98,6 @@ header .logo span {
 a {
     text-decoration: none;
     color: black;
-    font-family: 'Inter', sans-serif;
     font-weight: 500;
     font-size: 15px;
 }
@@ -119,13 +118,12 @@ a {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color: whitesmoke;
+    background-color: white;
     color: rgb(0, 0, 0);
     padding: 10px 15px;
     margin: 5px 5px 5px 0px;
     border-radius: 5px;
     border: 0;
-    font-family: 'Inter', sans-serif;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -151,7 +149,6 @@ a {
     margin: 5px 5px 5px 0px;
     border-radius: 5px;
     border: 0;
-    font-family: 'Inter', sans-serif;
     font-weight: 500;
     cursor: pointer;
     transition: background-color 0.3s;
@@ -166,8 +163,6 @@ a {
     width: 15px;
     height: 15px;
 }
-
-
 
 
 
