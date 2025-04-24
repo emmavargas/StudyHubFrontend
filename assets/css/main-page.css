@@ -12,6 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    width: 100%;
     margin: 0;
     background-color: whitesmoke;
 }
@@ -145,8 +146,6 @@ a{
     padding: 20px 115px;
     max-width: 1600px;
     display: flex;
-    margin-right: auto;
-    margin-left: auto;
     flex-direction: column;
     gap: 40px;
 }
@@ -489,3 +488,41 @@ a{
 }
 
 
+@media (max-width: 768px) {
+    *{
+        text-align: center;
+    }
+    body {
+        width: 100%;
+    }
+
+    header {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .main-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding:  170px 30px 30px 30px;
+        width: 100%;
+        margin: 0;
+    }
+
+    .courses-row {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+    }
+
+    .modal .creation-modal, .confirmation-delete-container {
+        margin-right: auto;
+        margin-left: auto;
+        width: 80%;
+    }
+}

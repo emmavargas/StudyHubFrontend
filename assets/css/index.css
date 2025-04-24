@@ -261,6 +261,7 @@ section {
     justify-content: center;
     padding-top: 150px;
     padding-bottom: 150px;
+    overflow: hidden;  
 }
 
 .caracteristicas .caracteristicas-titulos {
@@ -451,3 +452,46 @@ section {
     text-align: center;
 }
 
+
+
+@media (max-width: 768px) {
+    *{
+        text-align: center;
+    }
+
+    header {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    main {
+        padding-top: 140px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+    }
+    .caracteristicas{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .caracteristicas-titulos {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+    }
+
+    .caracteristicas-item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 5px;
+    }
+
+}

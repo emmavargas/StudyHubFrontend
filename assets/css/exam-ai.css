@@ -12,6 +12,7 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    width: 100%;
     margin: 0;
     background-color: whitesmoke;
 }
@@ -303,7 +304,7 @@ a{
 
 .container-exam {
     background-color: whitesmoke;
-    max-height: 500px;
+    height: auto;
     padding: 30px 20px;
     display: flex;
     flex-direction: column;
@@ -631,6 +632,8 @@ input{
 
 .container-btn-error {
     width: 100%;
+    height: 100px;
+    overflow: hidden;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -681,3 +684,27 @@ input{
     background-color: #f0f0f0;
 }
 
+@media (max-width: 768px) {
+    *{
+        text-align: center;
+    }
+    body {
+        width: 100%;
+    }
+
+    header {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .main-container, .result-container, .loading, .error-container{
+        padding:  170px 30px 30px 30px;
+        width: 100%;
+        margin: 0;
+    }
+
+
+
+
+}
