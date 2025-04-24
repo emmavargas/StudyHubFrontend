@@ -490,10 +490,8 @@ a {
 
     }
     
-    .nav-center nav,
-    .nav-actions nav {
-        flex-direction: column;
-        gap: 10px;
+    .nav-center {
+        white-space: nowrap;
     }
 
     .main-container {
