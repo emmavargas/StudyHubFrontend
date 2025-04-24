@@ -12,7 +12,6 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    width: 100%;
     margin: 0;
     background-color: whitesmoke;
 }
@@ -144,7 +143,7 @@ a{
     min-height: 100%;
     margin-top: 110px;
     padding: 20px 115px;
-    width: 100%;
+    max-width: 1400px;
     display: flex;
     flex-direction: column;
     gap: 40px;
