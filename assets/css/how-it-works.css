@@ -535,6 +535,10 @@ main {
         flex-direction: column;
 
     }
+    
+    section[id] {
+        scroll-margin-top: 160px; 
+    }
 
     main {
         padding-top: 50px;

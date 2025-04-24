@@ -1,5 +1,15 @@
 const form = document.getElementById('login-form');
 const message = document.querySelector('.message-login');
+let isAuthenticated = false;
+
+function startedApp() {
+    if (isAuthenticated) {
+        window.location.href = '/main';
+    } else {
+        document.querySelector('#login').scrollIntoView({ behavior: 'smooth' });
+    }
+}
+
 
 document.addEventListener('DOMContentLoaded', async function(){
 
@@ -10,7 +20,7 @@ document.addEventListener('DOMContentLoaded', async function(){
                 credentials: 'include'
             });
             if(response.ok){
-                
+                isAuthenticated = true;
                 const sectionLoginHtml = document.querySelector('.login-container');
                 sectionLoginHtml.style.display = 'none';
                 const stateLogin = document.querySelector('.nav-actions');

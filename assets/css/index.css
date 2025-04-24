@@ -247,6 +247,7 @@ main {
     height: 80%;
 }
 
+
 section {
     margin: 0;
 }
@@ -460,11 +461,16 @@ section {
     }
 
 
+    section[id] {
+        scroll-margin-top: 160px; 
+    }
     main {
         padding: 140px 0px 0px 0px;
         display: flex;
         flex-direction: column;
         gap: 20px;
+        min-height: 100vh;
+        justify-content: center;
     }
 
     .content-main {
@@ -474,10 +480,12 @@ section {
     .content-main h1 {
         padding: 0px;
         text-align: center;
+        font-size: 40px;
     }
 
     .content-main p {
         padding: 0px;
+        font-size: 16px;
     }
 
     .caracteristicas {
@@ -485,6 +493,9 @@ section {
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        min-height: 100vh;
+        padding-top: 140px;
+        padding-bottom: 20px;
     }
 
     .caracteristicas-titulos {
@@ -494,11 +505,34 @@ section {
         justify-content: center;
     }
 
+    .caracteristicas-titulos h2 {
+        font-size: 28px;
+    }
+
+    .caracteristicas-titulos span {
+        font-size: 16px;
+    }
+
     .caracteristicas-item {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
-        gap: 5px;
+        gap: 20px; 
+    }
+
+    .caracteristicas-item .item {
+        height: auto; 
+    }
+
+    .login-container {
+        min-height: 100vh;
+        justify-content: center; 
+        padding-top: 140px;
+    }
+
+    .login-container .login-box {
+        margin-top: 20px;
+        margin-bottom: 20px;
     }
 }
