@@ -143,7 +143,7 @@ a{
     min-height: 100%;
     margin-top: 110px;
     padding: 20px 115px;
-    max-width: 1400px;
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 40px;
