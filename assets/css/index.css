@@ -467,10 +467,23 @@ section {
     }
 
     main {
-        padding-top: 140px;
+        padding: 140px 0px 0px 0px;
         display: flex;
         flex-direction: column;
         gap: 20px;
+    }
+
+    .content-main{
+        padding: 0px 15px;
+    }
+
+    .content-main h1 {
+        padding: 0px;
+        text-align: center;
+    }
+
+    .content-main p {
+        padding: 0px;
     }
     .caracteristicas{
         display: flex;
