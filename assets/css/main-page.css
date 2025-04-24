@@ -489,6 +489,12 @@ a {
         flex-direction: column;
 
     }
+    
+    .nav-center nav,
+    .nav-actions nav {
+        flex-direction: column;
+        gap: 10px;
+    }
 
     .main-container {
         display: flex;
