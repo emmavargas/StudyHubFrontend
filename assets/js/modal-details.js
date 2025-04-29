@@ -27,6 +27,7 @@ async function openModal(action, element) {
             <div class="item-card-modal">
                 <h4>Titulo de Tema</h4>
                 <input id="topic-title" type="text" placeholder="Ej: Logica Proposicional" required>
+                <span id="error-message"></span>
             </div>
             <div class="item-card-modal">
                 <h4>Descripcion</h4>
@@ -76,6 +77,7 @@ async function openModal(action, element) {
             <div class="item-card-modal">
                 <h4>Titulo de Tema</h4>
                 <input id="topic-title" type="text" placeholder="Ej: Logica Proposicional" required>
+                <span id="error-message"></span>
             </div>
             <div class="item-card-modal">
                 <h4>Descripcion</h4>
@@ -93,8 +95,11 @@ async function openModal(action, element) {
         `;
         modal.appendChild(formEdit);
         formEdit.querySelector('#topic-title').value = dataTopic.title;
+        formEdit.querySelector('#topic-title').setAttribute('data-title', dataTopic.title || '');
         formEdit.querySelector('#topic-description').value = dataTopic.description;
+        formEdit.querySelector('#topic-description').setAttribute('data-description', dataTopic.description || '');
         formEdit.querySelector('#topic-bibliography').value = dataTopic.bibliography;
+        formEdit.querySelector('#topic-bibliography').setAttribute('data-bibliography', dataTopic.bibliography || '');
         formEdit.addEventListener('submit', (event) => {
             event.preventDefault();
             handleEditFormSubmit(event, topicId);
@@ -152,6 +157,7 @@ async function handleCreateFormSubmit(event){
     topicsCollection.appendChild(topicCard);
     event.target.reset();
     closeModal();
+
 }
 
 
@@ -171,6 +177,11 @@ async function createTopicCard(title, description, bibliography){
             }),
             credentials:'include'
         });
+
+        if (!response.ok) {
+            throw new Error('cookies invalido o error en el servidor');
+        }
+
         const data = await response.json();
         if(data && data.id){
             topicCard.dataset.id = data.id;
@@ -245,7 +256,8 @@ async function handleEditFormSubmit(event, idTopic){
         })
 
         if (!response.ok) {
-            throw new Error(`Error en la solicitud: ${response.statusText}`);
+            
+            throw new Error("Error Cookies invalido o error en el servidor");
         }
         const dataResponse = await response.json();
 
@@ -262,6 +274,7 @@ async function handleEditFormSubmit(event, idTopic){
         
     }catch(error){
         console.error('Error al editar el tema:', error);
+        window.location.href = "/";
     }
 
     closeModal();

@@ -23,6 +23,7 @@ async function openModal(action, element) {
             <div class="item-course">
                 <h4>Titulo de curso</h4>
                 <input id="course-title" type="text" placeholder="Ej: Matetica Discreta" required>
+                <span id="error-message"></span>
             </div>
             <div class="item-course">
                 <h4>Bibliografía</h4>
@@ -70,7 +71,8 @@ async function openModal(action, element) {
             </div> 
             <div class="item-course">
                 <h4>Titulo de curso</h4>
-                <input id="course-title" type="text" placeholder="Ej: Matetica Discreta" required>
+                <input id="course-title" type="text" placeholder="Ej: Matetica Discreta" required >
+                <span id="error-message"></span>
             </div>
             <div class="item-course">
                 <h4>Bibliografía</h4>
@@ -78,13 +80,15 @@ async function openModal(action, element) {
             </div>
             <div class="options-add-close">
                 <button type="button" class="cancel" onclick="closeModal()">Cancelar</button>
-                <button type="submit" class="create">Editar Curso</button>
+                <button type="submit" class="create">Editar curso</button>
             </div>  
         `;
         modal.appendChild(formEdit);
 
         formEdit.querySelector('#course-title').value = dataCourse.title || '';
+        formEdit.querySelector('#course-title').setAttribute('data-title', dataCourse.title || '');
         formEdit.querySelector('#course-bibliography').value = dataCourse.contentBibliography || '';
+        formEdit.querySelector('#course-bibliography').setAttribute('data-bibliography', dataCourse.contentBibliography || ''); // Guardar en data-bibliography
         formEdit.addEventListener('submit', (event) => {
             event.preventDefault();
             handleEditFormSubmit(event, courseId);
@@ -147,6 +151,7 @@ async function handleCreateFormSubmit(event) {
     }
     event.target.reset();
     closeModal();
+
 }
 
 async function createCourseCard(title, bibliography) {
@@ -205,7 +210,7 @@ async function createCourseCard(title, bibliography) {
         
 
     } catch (error) {
-        console.error('Error en POST:', error);
+        console.error('Error en POST:', error.message);
         window.location.href = "/";
     }
     return courseCard;
@@ -257,6 +262,10 @@ async function handleEditFormSubmit(event, idCourse){
         body: JSON.stringify(data),
         credentials: 'include'
     });
+    
+    if (!response.ok) {
+        window.location.href = "/";
+    }
     const dataResponse = await response.json();
     const card = document.querySelector(`[data-id="${idCourse}"]`)
 
