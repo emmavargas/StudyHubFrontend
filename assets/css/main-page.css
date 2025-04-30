@@ -276,7 +276,7 @@ a {
 }
 
 .action-card button {
-    background-color: rgb(235, 235, 235);
+    background-color: #f0f0f0;
     padding: 10px 20px;
     border-radius: 5px;
     color: black;
@@ -289,7 +289,7 @@ a {
 }
 
 .action-card button:hover {
-    background-color: #f0f0f0;
+    background-color: rgb(235, 235, 235);
 }
 
 .modal {
