@@ -209,6 +209,7 @@ a {
 }
 
 .course-card {
+    background-color: whitesmoke;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
