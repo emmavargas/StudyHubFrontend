@@ -14,7 +14,7 @@ body {
     min-height: 100vh;
     margin: 0;
     width: 100%;
-    background-color: whitesmoke;
+    background-color: white;
     overflow: auto;
 }
 
@@ -30,7 +30,7 @@ header {
     left: 0;
     right: 0;
     z-index: 1000;
-    background-color: whitesmoke;
+    background-color: white;
     width: 100%;
 }
 
@@ -84,7 +84,7 @@ header .logo span {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color: whitesmoke;
+    background-color: white;
     color: rgb(0, 0, 0);
     padding: 10px 15px;
     margin: 5px 5px 5px 0px;
@@ -110,7 +110,7 @@ header .logo span {
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    background-color: whitesmoke;
+    background-color: white;
     color: rgb(233, 55, 55);
     padding: 10px 15px;
     margin: 5px 5px 5px 0px;
@@ -166,7 +166,7 @@ a {
 .back-course .back {
     display: flex;
     align-items: center;
-    background-color: whitesmoke;
+    background-color: white;
     color: rgb(0, 0, 0);
     padding: 5px;
     gap: 10px;
