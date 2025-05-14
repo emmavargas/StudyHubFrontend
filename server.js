@@ -43,6 +43,6 @@ app.get('/user/courses/:id/exam-ai', (req, res) => {
     res.sendFile(path.join(__dirname, 'page', 'exam-ai.html'));
 });
 
-app.listen(port, () => {
+app.listen(port, 'localhost', () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
 });
