@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async function(){
 
 
         try{
-            const response = await fetch('http://65.21.56.202:8080/user/courses',{
+            const response = await fetch('https://studyhub.emmanueldev.com.ar/api/user/courses',{
                 method: 'GET',
                 credentials: 'include'
             });
@@ -59,7 +59,7 @@ form.addEventListener('submit', async(e) => {
 
 
     try{
-        const response = await fetch('http://65.21.56.202:8080/login',{
+        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/login',{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json'

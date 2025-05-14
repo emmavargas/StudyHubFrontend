@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async() =>{
     flagIncremetCoount = false;
 
     try{
-        const response = await fetch(`http://65.21.56.202:8080/user/courses/${idCourse}`, {
+        const response = await fetch(`https://studyhub.emmanueldev.com.ar/api/user/courses/${idCourse}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -264,7 +264,7 @@ async function loadingPage(courseExamen){
     }
     const animation = animarPantallaCarga();
 
-    const responseExam = fetch(`http://65.21.56.202:8080/user/courses/${idCourse}/generar-examen`, {
+    const responseExam = fetch(`https://studyhub.emmanueldev.com.ar/api/user/courses/${idCourse}/generar-examen`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
