@@ -375,9 +375,9 @@ function toManyRequest(){
             <img src="/assets/img/error-connection.svg" alt="Error de conexion">
         </div>
         <img class="icon-big" src="/assets/img/error-connection.svg" alt="Error de conexion">
-        <span>Has alcanzado el límite gratuito de exámenes diarios. Podrás realizar más exámenes en 30 minutos.</span>
+        <span>Has alcanzado el límite gratuito de exámenes diarios. Podrás realizar más exámenes en 30 minutos o suscribirte para acceder sin restricciones.</span>
         <div class="container-btn-error">
-            <button class="reload-connection-btn" onclick="reloadPage()">Reintentar</button>
+            <button class="reload-connection-btn" id="suscribirse" onclick="iniciarSuscripcion()">Suscribirse</button>
             <button class="back-course" onclick="window.location.href='/user/courses'">Volver a Cursos</button>
         </div>
     `
@@ -385,4 +385,26 @@ function toManyRequest(){
     
 function reloadPage(){
     window.location.href = `/user/courses/${idCourse}/exam-ai`
+}
+
+async function iniciarSuscripcion() {
+    try {
+        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/payment', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include' // Para enviar cookies de autenticación
+        });
+
+        if (!response.ok) {
+            throw new Error(`Error en la solicitud de pago: ${response.status}`);
+        }
+
+        const paymentUrl = await response.text(); // La URL de Mercado Pago (sandbox init point)
+        window.location.href = paymentUrl; // Redirige al usuario a la página de pago
+    } catch (error) {
+        console.error('Error al iniciar suscripción:', error);
+        alert('No se pudo iniciar la suscripción. Por favor, intenta de nuevo más tarde.');
+    }
 }
