@@ -27,6 +27,15 @@ app.get('/reference', (req, res) => {
     res.sendFile(path.join(__dirname, 'page', 'reference.html'));
     
 });
+app.get('/auth', (req, res) => {
+    res.sendFile(path.join(__dirname, 'page', 'login-register.html'));
+    
+});
+
+app.get('/profile', (req, res) => {
+    res.sendFile(path.join(__dirname, 'page', 'profile.html'));
+    
+});
 
 
 app.get('/user/courses', (req, res) => {
@@ -42,6 +51,7 @@ app.get('/user/courses/:id', (req, res) => {
 app.get('/user/courses/:id/exam-ai', (req, res) => {
     res.sendFile(path.join(__dirname, 'page', 'exam-ai.html'));
 });
+
 
 app.listen(port, 'localhost', () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);

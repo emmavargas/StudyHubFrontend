@@ -1,25 +1,17 @@
 const form = document.getElementById('login-form');
 const message = document.querySelector('.message-login');
-let isAuthenticated = false;
-
-function startedApp() {
-    if (isAuthenticated) {
-        window.location.href = '/user/courses';
-    } else {
-        document.querySelector('#login').scrollIntoView({ behavior: 'smooth' });
-    }
-}
-
 
 document.addEventListener('DOMContentLoaded', async function(){
 
 
         try{
-            const response = await fetch('https://studyhub.emmanueldev.com.ar/api/user/courses',{
+            const response = await fetch('http://localhost:8080/api/user/courses',{
                 method: 'GET',
                 credentials: 'include'
             });
             if(response.ok){
+                window.location.href = '/user/courses';
+                /*
                 isAuthenticated = true;
                 const sectionLoginHtml = document.querySelector('.login-container');
                 sectionLoginHtml.style.display = 'none';
@@ -36,6 +28,7 @@ document.addEventListener('DOMContentLoaded', async function(){
                         </button>            
                     </nav>       
                 `
+                */
             }
             else{
                 return;
@@ -44,40 +37,4 @@ document.addEventListener('DOMContentLoaded', async function(){
             console.log('No authenticado')
         }
 });
-
-
-form.addEventListener('submit', async(e) => {
-    e.preventDefault();
-
-    const username = document.querySelector('input[name="username"]').value;
-    const password = document.querySelector('input[name="password"]').value;
-
-    const loginData= {
-        username: username,
-        password: password
-    }
-
-
-    try{
-        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/login',{
-            method:'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(loginData),
-            credentials: 'include'
-        })
-        if(!response.ok){
-            throw new Error('Error en la solicitud de inicio de sesión');
-            return;
-        }
-
-        window.location.href = '/user/courses'
-
-    }catch(error){
-        console.error('Error:', error);
-        message.innerHTML = 'Error al iniciar sesión. Por favor, verifica tus credenciales.';
-    };
-    form.reset();
-})
 

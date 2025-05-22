@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyHub</title>
+    <link rel="stylesheet" href="/assets/css/login-regilter.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Cabin:ital,wght@0,400..700;1,400..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&family=Sriracha&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <img src="assets/img/libro.png" alt="Logo de StudyHub">
+                <a href="/"><span>StudyHub</span></a>
+            </div>
+            <div class="nav-center">
+                <nav>
+                    <a href="#caracteristicas">Caracteristicas</a>
+                    <a href="/how-it-works">Como funciona</a>
+                    <a href="/reference">Referencias</a>
+                </nav>
+            </div>
+            <div class="nav-actions">
+                <nav>
+                    <a href="/auth">Iniciar sesion</a>
+                    <button class="register" type="button" onclick="window.location.href='/auth'">Registrarse</button>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        <div class="container-title">
+            <h1>Bienvenido a StudyHub</h1>
+            <span>La plataforma para prepararte de manera inteligente</span>
+        </div>
+        <div class="container">
+            <div class="login-register-btn-container">
+                <button class="btn active" type="button" onclick="switchForm('login',this)">Iniciar Sesión</button>
+                <button class="btn" type="button" onclick="switchForm('register',this)">Registrarse</button>
+            </div>
+            <div class="message-login"></div>
+            <div class="container-form">
+                <form id="login-form" class="login-form" method="post">
+                    <div class="inputs">
+                        <div class="input-group">
+                            <label for="username">Usuario</label>
+                            <input type="text" id="username" name="username" placeholder="Ingrese su usuario" required>
+                        </div>
+                        <div class="input-group">
+                            <div class="password-label-reset">
+                                <label for="password" >Contraseña</label>
+                                <a href="/reset-password" class="reset-password">Olvidaste tu contraseña?</a>
+                            </div>
+                            <input type="password" id="password" name="password" placeholder="Ingrese su contraseña" required >
+                        </div>
+                        <button class="send-btn" type="submit">Iniciar Sesión</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </main>
+    <script src="/assets/js/profile.js"></script>
+    <script src="/assets/js/login-register.js"></script>
+</body>
+</html>
