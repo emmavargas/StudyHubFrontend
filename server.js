@@ -18,11 +18,6 @@ app.get('/how-it-works', (req, res) => {
     
 });
 
-app.get('/register', (req, res) => {
-    res.sendFile(path.join(__dirname, 'page', 'register.html'));
-    
-});
-
 app.get('/reference', (req, res) => {
     res.sendFile(path.join(__dirname, 'page', 'reference.html'));
     
@@ -32,6 +27,10 @@ app.get('/auth', (req, res) => {
     
 });
 
+app.get('/reset-password', (req, res) => {
+    res.sendFile(path.join(__dirname, 'page', 'recovery.html'));
+    
+});
 app.get('/profile', (req, res) => {
     res.sendFile(path.join(__dirname, 'page', 'profile.html'));
     

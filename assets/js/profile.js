@@ -158,7 +158,6 @@ async function savePassword(btnAction){
 
         const responseData = await response.json();
         if(!response.ok){
-            console.log(responseData);
             errorMessage.style.display = 'flex';
             const errorText = errorMessage.querySelector('span');
             errorText.innerHTML = responseData.message;
