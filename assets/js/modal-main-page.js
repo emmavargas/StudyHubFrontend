@@ -9,11 +9,12 @@ async function openModal(action, element) {
         modal.style.opacity = "1";
     }, 10);
 
+    // Limpiar contenido y eventos previos
+    modal.innerHTML = '';
+
     if (action === 'create') {
-        modal.innerHTML = '';
         const formCreate = document.createElement('form');
         formCreate.classList.add('creation-modal');
-        //revisar porque se uso setAtrtibute ya que quizas
         formCreate.setAttribute('id', 'modal-form-create');
         formCreate.innerHTML = `
             <div class="modal-header">
@@ -37,10 +38,10 @@ async function openModal(action, element) {
         `;
         modal.appendChild(formCreate);
 
+        // Añadir listener con { once: true } para que se ejecute solo una vez por apertura
         formCreate.addEventListener('submit', handleCreateFormSubmit, { once: true });
         formCreate.querySelector('.cancel').addEventListener('click', cancelClick);
     } else if (action === 'edit') {
-        modal.innerHTML = '';
         const courseCard = element.closest('.course-card');
         if (!courseCard) {
             console.error('No se encontró un elemento .course-card');
@@ -89,29 +90,29 @@ async function openModal(action, element) {
         formEdit.querySelector('#course-title').value = dataCourse.title || '';
         formEdit.querySelector('#course-title').setAttribute('data-title', dataCourse.title || '');
         formEdit.querySelector('#course-bibliography').value = dataCourse.contentBibliography || '';
-        formEdit.querySelector('#course-bibliography').setAttribute('data-bibliography', dataCourse.contentBibliography || ''); // Guardar en data-bibliography
+        formEdit.querySelector('#course-bibliography').setAttribute('data-bibliography', dataCourse.contentBibliography || '');
         formEdit.addEventListener('submit', (event) => {
             event.preventDefault();
             handleEditFormSubmit(event, courseId);
         }, { once: true });
         formEdit.querySelector('.cancel').addEventListener('click', cancelClick);
-    }else if(action === 'delete'){
+    } else if (action === 'delete') {
         modal.innerHTML = '';
         const confirmation = document.createElement('div');
-        confirmation.classList.add('confirmation-delete-container')
-        confirmation.innerHTML =`
+        confirmation.classList.add('confirmation-delete-container');
+        confirmation.innerHTML = `
             <h3>¿Estás seguro de que quieres eliminar este Curso? Esta acción no se puede deshacer.</h3>
             <div class="confirmation">
                 <button class="delete-btn">Aceptar</button>
                 <button class="cancel-delete-btn">Cancelar</button>
             </div>   
-        `
+        `;
+        modal.appendChild(confirmation);
         confirmation.querySelector('.delete-btn').addEventListener('click', async () => {
             if (isSubmitting) return;
             isSubmitting = true;
-
             try {
-                await deleteCourse(element);  // Asegurate de que deleteCourse sea async y retorne una promesa
+                await deleteCourse(element);
                 closeModal();
             } catch (error) {
                 console.error('Error al eliminar curso:', error.message);
@@ -120,9 +121,7 @@ async function openModal(action, element) {
             }
         });
         confirmation.querySelector('.cancel-delete-btn').addEventListener('click', cancelClick);
-        
     }
-
 }
 
 function closeModal() {
@@ -152,7 +151,7 @@ async function handleCreateFormSubmit(event) {
     const form = event.target;
     const submitButton = form.querySelector('.create');
 
-    // Desactivar el botón
+    // Desactivar el botón inmediatamente
     submitButton.disabled = true;
 
     try {
@@ -177,8 +176,8 @@ async function handleCreateFormSubmit(event) {
     } catch (error) {
         console.error('Error en POST:', error.message);
     } finally {
-        // Reactivar el botón
-        submitButton.disabled = false;
+        isSubmitting = false; // Liberar el flag
+        submitButton.disabled = false; // Reactivar el botón
     }
 }
 
@@ -275,13 +274,13 @@ async function getDataCourse(idCourse) {
 
 async function handleEditFormSubmit(event, idCourse) {
     event.preventDefault();
-
-    if (isSubmitting) return;
+    if (isSubmitting) return; // Evita múltiples envíos
     isSubmitting = true;
 
     const form = event.target;
     const submitButton = form.querySelector('.create');
 
+    // Desactivar el botón inmediatamente
     submitButton.disabled = true;
 
     try {
@@ -309,7 +308,7 @@ async function handleEditFormSubmit(event, idCourse) {
     } catch (error) {
         console.error('Error al editar:', error.message);
     } finally {
-        isSubmitting = false;
-        submitButton.disabled = false;
+        isSubmitting = false; // Liberar el flag
+        submitButton.disabled = false; // Reactivar el botón
     }
 }
