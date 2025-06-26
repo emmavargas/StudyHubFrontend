@@ -93,7 +93,7 @@ async function openModal(action, element) {
         formEdit.addEventListener('submit', (event) => {
             event.preventDefault();
             handleEditFormSubmit(event, courseId);
-        });
+        }, { once: true });
         formEdit.querySelector('.cancel').addEventListener('click', cancelClick);
     }else if(action === 'delete'){
         modal.innerHTML = '';
