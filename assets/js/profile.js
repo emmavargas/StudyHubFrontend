@@ -3,7 +3,7 @@ const containers = document.querySelectorAll('.container');
 document.addEventListener("DOMContentLoaded", async function (){
 
     try {
-        const response = await fetch('http://localhost:8080/api/user/courses',{
+        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/user/courses',{
             method: 'GET',
             credentials: 'include'
         });
@@ -41,7 +41,7 @@ containers.forEach(container =>{
             // Si estamos editando email y username, cargamos datos actuales del backend
             if (btn.dataset.action === 'edit-email-username') {
                 try {
-                    const response = await fetch('http://localhost:8080/api/user/me', {
+                    const response = await fetch('https://studyhub.emmanueldev.com.ar/api/user/me', {
                         method: 'GET',
                         credentials: 'include'
                     });
@@ -120,7 +120,7 @@ function saveNameLastname(btnAction){
         lastname: inputs[1].value
     }
 
-    const response = fetch('http://localhost:8080/api/user/edit-name-lastname', {
+    const response = fetch('https://studyhub.emmanueldev.com.ar/api/user/edit-name-lastname', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
@@ -158,7 +158,7 @@ async function saveEmailUsername(btnAction) {
     }
 
     try {
-        const response = await fetch('http://localhost:8080/api/update-email-username', {
+        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/update-email-username', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -221,7 +221,7 @@ async function savePassword(btnAction){
     }
     try{
 
-        const response = await fetch('http://localhost:8080/api/update-password', {
+        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/update-password', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

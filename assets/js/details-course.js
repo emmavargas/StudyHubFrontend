@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', async() => {
 
 
     try{
-        const response = await fetch(`http://localhost:8080/api/user/courses/${idCourse}`,{
+        const response = await fetch(`https://studyhub.emmanueldev.com.ar/api/user/courses/${idCourse}`,{
             method:'GET',
             credentials: 'include'
         })
@@ -74,7 +74,7 @@ function switchContent(contentType, button) {
     
     const paragraph = card.querySelector('p');
     
-    fetch(`http://localhost:8080/api/user/courses/${idCourse}/topics/${card.dataset.id}`, {
+    fetch(`https://studyhub.emmanueldev.com.ar/api/user/courses/${idCourse}/topics/${card.dataset.id}`, {
         method: 'GET',
         credentials: 'include'
     })
@@ -123,7 +123,7 @@ function switchContent(contentType, button) {
                 deleteBtn.classList.add('delete-file');
                 deleteBtn.title = 'Eliminar archivo';
                 deleteBtn.onclick = () => {
-                    fetch(`http://localhost:8080/api/user/courses/${idCourse}/topics/${idTopic}/files/${file.id}`, {
+                    fetch(`https://studyhub.emmanueldev.com.ar/api/user/courses/${idCourse}/topics/${idTopic}/files/${file.id}`, {
                         method: 'DELETE',
                         credentials: 'include'
                     })
@@ -167,7 +167,7 @@ function deleteTopic(element){
     console.log(idTopic);
     
 
-    fetch(`http://localhost:8080/api/user/courses/${idCourse}/topics/${idTopic}`, {
+    fetch(`https://studyhub.emmanueldev.com.ar/api/user/courses/${idCourse}/topics/${idTopic}`, {
         method: 'DELETE',
         credentials: 'include'
     })

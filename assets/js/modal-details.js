@@ -331,7 +331,7 @@ async function handleCreateFormSubmit(event) {
     });
 
     try {
-        const response = await fetch(`http://localhost:8080/api/user/courses/${idCourse}/topics`, {
+        const response = await fetch(`https://studyhub.emmanueldev.com.ar/api/user/courses/${idCourse}/topics`, {
             method: 'POST',
             body: formData,
             credentials: 'include'
@@ -384,7 +384,7 @@ async function handleCreateFormSubmit(event) {
     async function getDataTopic(idTopic) {
         let dataTopic = {};
         try {
-            const response = await fetch(`http://localhost:8080/api/user/courses/${idCourse}/topics/${idTopic}`, {
+            const response = await fetch(`https://studyhub.emmanueldev.com.ar/api/user/courses/${idCourse}/topics/${idTopic}`, {
                 method: 'GET',
                 credentials: 'include'
             });
@@ -412,7 +412,7 @@ async function handleCreateFormSubmit(event) {
 
 
     try {
-        const response = await fetch(`http://localhost:8080/api/user/courses/${idCourse}/topics/${idTopic}`, {
+        const response = await fetch(`https://studyhub.emmanueldev.com.ar/api/user/courses/${idCourse}/topics/${idTopic}`, {
             method: 'PUT',
             body: formData,
             credentials: 'include'
