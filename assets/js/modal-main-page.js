@@ -1,5 +1,6 @@
 const modal = document.querySelector(".modal");
 let isSubmitting = false; // Flag global para bloquear múltiples clics
+let requestId = 0; // Identificador único para rastrear solicitudes
 
 async function openModal(action, element) {
     modal.style.display = "block";
@@ -37,7 +38,12 @@ async function openModal(action, element) {
         `;
         modal.appendChild(formCreate);
 
-        formCreate.addEventListener('submit', handleCreateFormSubmit, { once: true });
+        // Añadir listener con función dedicada y { once: true }
+        const submitHandler = (e) => {
+            e.preventDefault();
+            handleCreateFormSubmit(e);
+        };
+        formCreate.addEventListener('submit', submitHandler, { once: true });
         formCreate.querySelector('.cancel').addEventListener('click', cancelClick);
     } else if (action === 'edit') {
         const courseCard = element.closest('.course-card');
@@ -89,10 +95,11 @@ async function openModal(action, element) {
         formEdit.querySelector('#course-title').setAttribute('data-title', dataCourse.title || '');
         formEdit.querySelector('#course-bibliography').value = dataCourse.contentBibliography || '';
         formEdit.querySelector('#course-bibliography').setAttribute('data-bibliography', dataCourse.contentBibliography || '');
-        formEdit.addEventListener('submit', (event) => {
-            event.preventDefault();
-            handleEditFormSubmit(event, courseId);
-        }, { once: true });
+        const editHandler = (e) => {
+            e.preventDefault();
+            handleEditFormSubmit(e, courseId);
+        };
+        formEdit.addEventListener('submit', editHandler, { once: true });
         formEdit.querySelector('.cancel').addEventListener('click', cancelClick);
     } else if (action === 'delete') {
         modal.innerHTML = '';
@@ -148,18 +155,23 @@ async function handleCreateFormSubmit(event) {
         return; // Sale inmediatamente si ya hay una solicitud
     }
     isSubmitting = true; // Bloquea cualquier otro clic
+    const currentRequestId = ++requestId; // Asigna un ID único a esta solicitud
+    console.log(`Iniciando solicitud de creación #${currentRequestId}`);
 
     const form = event.target;
     const submitButton = form.querySelector('.create');
 
     // Desactivar el botón de inmediato
     submitButton.disabled = true;
-    console.log('Procesando solicitud de creación...');
 
     try {
         const title = document.getElementById('course-title').value;
         const bibliography = document.getElementById('course-bibliography').value;
         const courseCard = await createCourseCard(title, bibliography);
+        if (currentRequestId !== requestId) {
+            console.log(`Solicitud #${currentRequestId} cancelada por nueva solicitud`);
+            return; // Cancela si hay una solicitud más reciente
+        }
         const coursesContainer = document.querySelector('.courses-container');
         const rows = coursesContainer.querySelectorAll('.courses-row');
 
@@ -177,9 +189,11 @@ async function handleCreateFormSubmit(event) {
     } catch (error) {
         console.error('Error en POST:', error.message);
     } finally {
-        isSubmitting = false; // Libera el bloqueo
-        submitButton.disabled = false; // Reactiva el botón
-        console.log('Solicitud completada');
+        if (currentRequestId === requestId) {
+            isSubmitting = false; // Libera el bloqueo solo si es la última solicitud
+            submitButton.disabled = false; // Reactiva el botón
+            console.log(`Solicitud #${currentRequestId} completada`);
+        }
     }
 }
 
@@ -271,13 +285,14 @@ async function handleEditFormSubmit(event, idCourse) {
         return; // Sale inmediatamente si ya hay una solicitud
     }
     isSubmitting = true; // Bloquea cualquier otro clic
+    const currentRequestId = ++requestId; // Asigna un ID único a esta solicitud
+    console.log(`Iniciando solicitud de edición #${currentRequestId}`);
 
     const form = event.target;
     const submitButton = form.querySelector('.create');
 
     // Desactivar el botón de inmediato
     submitButton.disabled = true;
-    console.log('Procesando solicitud de edición...');
 
     try {
         const title = document.getElementById('course-title').value;
@@ -299,6 +314,10 @@ async function handleEditFormSubmit(event, idCourse) {
             throw new Error('Error al actualizar el curso');
         }
         const dataResponse = await response.json();
+        if (currentRequestId !== requestId) {
+            console.log(`Solicitud #${currentRequestId} cancelada por nueva solicitud`);
+            return; // Cancela si hay una solicitud más reciente
+        }
         const card = document.querySelector(`[data-id="${idCourse}"]`);
         const titleCard = card.querySelector('h2');
         titleCard.textContent = dataResponse.title;
@@ -307,8 +326,10 @@ async function handleEditFormSubmit(event, idCourse) {
     } catch (error) {
         console.error('Error al editar:', error.message);
     } finally {
-        isSubmitting = false; // Libera el bloqueo
-        submitButton.disabled = false; // Reactiva el botón
-        console.log('Solicitud completada');
+        if (currentRequestId === requestId) {
+            isSubmitting = false; // Libera el bloqueo solo si es la última solicitud
+            submitButton.disabled = false; // Reactiva el botón
+            console.log(`Solicitud #${currentRequestId} completada`);
+        }
     }
 }
