@@ -1,6 +1,5 @@
-
 const modal = document.querySelector(".modal");
-let isSubmitting = false;
+let isSubmitting = false; // Flag global para bloquear múltiples clics
 
 async function openModal(action, element) {
     modal.style.display = "block";
@@ -38,8 +37,7 @@ async function openModal(action, element) {
         `;
         modal.appendChild(formCreate);
 
-        // Añadir listener con { once: true } para que se ejecute solo una vez por apertura
-        formCreate.addEventListener('submit', handleCreateFormSubmit, { once: true });
+        formCreate.addEventListener('submit', handleCreateFormSubmit, { once: true }); // Solo una ejecución por apertura
         formCreate.querySelector('.cancel').addEventListener('click', cancelClick);
     } else if (action === 'edit') {
         const courseCard = element.closest('.course-card');
@@ -94,7 +92,7 @@ async function openModal(action, element) {
         formEdit.addEventListener('submit', (event) => {
             event.preventDefault();
             handleEditFormSubmit(event, courseId);
-        }, { once: true });
+        }, { once: true }); // Solo una ejecución por apertura
         formEdit.querySelector('.cancel').addEventListener('click', cancelClick);
     } else if (action === 'delete') {
         modal.innerHTML = '';
@@ -125,7 +123,7 @@ async function openModal(action, element) {
 }
 
 function closeModal() {
-    isSubmitting = false; // ← Importante para desbloquear si se cierra antes
+    isSubmitting = false; // Liberar el bloqueo si se cierra manualmente
     modal.style.opacity = "0";
     document.body.style.overflow = "auto";
     setTimeout(() => {
@@ -138,21 +136,25 @@ window.onclick = function(event) {
         closeModal();
     }
 }
+
 function cancelClick() {
     closeModal();
 }
 
-
 async function handleCreateFormSubmit(event) {
     event.preventDefault();
-    if (isSubmitting) return; // Evita múltiples envíos
-    isSubmitting = true;
+    if (isSubmitting) {
+        console.log('Clic ignorado: solicitud ya en curso');
+        return; // Sale inmediatamente si ya hay una solicitud
+    }
+    isSubmitting = true; // Bloquea cualquier otro clic
 
     const form = event.target;
     const submitButton = form.querySelector('.create');
 
-    // Desactivar el botón inmediatamente
+    // Desactivar el botón de inmediato
     submitButton.disabled = true;
+    console.log('Procesando solicitud de creación...');
 
     try {
         const title = document.getElementById('course-title').value;
@@ -170,14 +172,14 @@ async function handleCreateFormSubmit(event) {
             rows[rows.length - 1].appendChild(courseCard);
         }
 
-        // Resetear el formulario y cerrar el modal
         form.reset();
         closeModal();
     } catch (error) {
         console.error('Error en POST:', error.message);
     } finally {
-        isSubmitting = false; // Liberar el flag
-        submitButton.disabled = false; // Reactivar el botón
+        isSubmitting = false; // Libera el bloqueo
+        submitButton.disabled = false; // Reactiva el botón
+        console.log('Solicitud completada');
     }
 }
 
@@ -194,7 +196,7 @@ async function createCourseCard(title, bibliography) {
                 title: title,
                 contentBibliography: bibliography
             }),
-            credentials:'include'
+            credentials: 'include'
         });
         if (!response.ok) {
             throw new Error('cookies invalido o error en el servidor');
@@ -228,14 +230,11 @@ async function createCourseCard(title, bibliography) {
         }
 
         const generateExamBtn = courseCard.querySelector('.generate-exam');
-        if(generateExamBtn){
+        if (generateExamBtn) {
             generateExamBtn.addEventListener('click', function() {
                 generateExamBtn(this);
             });
-
         }
-        
-
     } catch (error) {
         console.error('Error en POST:', error.message);
         window.location.href = "/";
@@ -243,54 +242,55 @@ async function createCourseCard(title, bibliography) {
     return courseCard;
 }
 
-
 async function getDataCourse(idCourse) {
     let dataCourse = {};
     try {
         const response = await fetch(`https://studyhub.emmanueldev.com.ar/api/user/courses/${idCourse}`, {
             method: 'GET',
             headers: {
-                //quedo sobrante=?
                 'Content-Type': 'application/json',
             },
-            credentials:'include'
+            credentials: 'include'
         });
 
         if (!response.ok) {
             throw new Error(`Error en la respuesta: ${response.status} - ${response.statusText}`);
-
         }
 
         dataCourse = await response.json();
     } catch (error) {
         console.error('Error al obtener datos del curso:', error);
     }
-
     return dataCourse;
 }
 
-
-
-
 async function handleEditFormSubmit(event, idCourse) {
     event.preventDefault();
-    if (isSubmitting) return; // Evita múltiples envíos
-    isSubmitting = true;
+    if (isSubmitting) {
+        console.log('Clic ignorado: solicitud ya en curso');
+        return; // Sale inmediatamente si ya hay una solicitud
+    }
+    isSubmitting = true; // Bloquea cualquier otro clic
 
     const form = event.target;
     const submitButton = form.querySelector('.create');
 
-    // Desactivar el botón inmediatamente
+    // Desactivar el botón de inmediato
     submitButton.disabled = true;
+    console.log('Procesando solicitud de edición...');
 
     try {
         const title = document.getElementById('course-title').value;
         const bibliography = document.getElementById('course-bibliography').value;
-        const data = { title, contentBibliography: bibliography };
-
+        const data = {
+            title: title,
+            contentBibliography: bibliography
+        };
         const response = await fetch(`https://studyhub.emmanueldev.com.ar/api/user/courses/${idCourse}`, {
             method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify(data),
             credentials: 'include'
         });
@@ -298,7 +298,6 @@ async function handleEditFormSubmit(event, idCourse) {
         if (!response.ok) {
             throw new Error('Error al actualizar el curso');
         }
-
         const dataResponse = await response.json();
         const card = document.querySelector(`[data-id="${idCourse}"]`);
         const titleCard = card.querySelector('h2');
@@ -308,7 +307,8 @@ async function handleEditFormSubmit(event, idCourse) {
     } catch (error) {
         console.error('Error al editar:', error.message);
     } finally {
-        isSubmitting = false; // Liberar el flag
-        submitButton.disabled = false; // Reactivar el botón
+        isSubmitting = false; // Libera el bloqueo
+        submitButton.disabled = false; // Reactiva el botón
+        console.log('Solicitud completada');
     }
 }
