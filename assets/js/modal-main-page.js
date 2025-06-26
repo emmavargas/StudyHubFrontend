@@ -81,8 +81,8 @@ async function openModal(action, element) {
                 <span id="error-message"></span>
             </div>
             <div class="item-course">
-                <h4>Bibliografía</h4>
-                <input id="course-bibliography" type="text" placeholder="Aguilera, N. (2020). Matemáticas Discretas: Fundamentos y Aplicaciones. Editorial Síntesis." required>
+                <h4>Descripcion</h4>
+                <input id="course-bibliography" type="text" placeholder="Matemáticas Discretas: Fundamentos y Aplicaciones. Editorial Síntesis." required>
             </div>
             <div class="options-add-close">
                 <button type="button" class="cancel" onclick="closeModal()">Cancelar</button>
