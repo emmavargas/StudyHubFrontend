@@ -1,5 +1,6 @@
 
 const modal = document.querySelector(".modal");
+let isSubmitting = false;
 
 async function openModal(action, element) {
     modal.style.display = "block";
@@ -105,11 +106,19 @@ async function openModal(action, element) {
                 <button class="cancel-delete-btn">Cancelar</button>
             </div>   
         `
-        modal.appendChild(confirmation);
-        confirmation.querySelector('.delete-btn').addEventListener('click', ()=>{
-            deleteCourse(element);
-            closeModal();
-        })
+        confirmation.querySelector('.delete-btn').addEventListener('click', async () => {
+            if (isSubmitting) return;
+            isSubmitting = true;
+
+            try {
+                await deleteCourse(element);  // Asegurate de que deleteCourse sea async y retorne una promesa
+                closeModal();
+            } catch (error) {
+                console.error('Error al eliminar curso:', error.message);
+            } finally {
+                isSubmitting = false;
+            }
+        });
         confirmation.querySelector('.cancel-delete-btn').addEventListener('click', cancelClick);
         
     }
@@ -117,6 +126,7 @@ async function openModal(action, element) {
 }
 
 function closeModal() {
+    isSubmitting = false; // ← Importante para desbloquear si se cierra antes
     modal.style.opacity = "0";
     document.body.style.overflow = "auto";
     setTimeout(() => {
@@ -136,6 +146,8 @@ function cancelClick() {
 
 async function handleCreateFormSubmit(event) {
     event.preventDefault();
+    if (isSubmitting) return; // Evita múltiples envíos
+    isSubmitting = true;
 
     const form = event.target;
     const submitButton = form.querySelector('.create');
@@ -264,10 +276,12 @@ async function getDataCourse(idCourse) {
 async function handleEditFormSubmit(event, idCourse) {
     event.preventDefault();
 
+    if (isSubmitting) return;
+    isSubmitting = true;
+
     const form = event.target;
     const submitButton = form.querySelector('.create');
 
-    // Desactivar el botón
     submitButton.disabled = true;
 
     try {
@@ -295,7 +309,7 @@ async function handleEditFormSubmit(event, idCourse) {
     } catch (error) {
         console.error('Error al editar:', error.message);
     } finally {
-        // Reactivar el botón
+        isSubmitting = false;
         submitButton.disabled = false;
     }
 }
