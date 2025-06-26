@@ -37,7 +37,7 @@ async function openModal(action, element) {
         `;
         modal.appendChild(formCreate);
 
-        formCreate.addEventListener('submit', handleCreateFormSubmit, { once: true }); // Solo una ejecución por apertura
+        formCreate.addEventListener('submit', handleCreateFormSubmit, { once: true });
         formCreate.querySelector('.cancel').addEventListener('click', cancelClick);
     } else if (action === 'edit') {
         const courseCard = element.closest('.course-card');
@@ -92,7 +92,7 @@ async function openModal(action, element) {
         formEdit.addEventListener('submit', (event) => {
             event.preventDefault();
             handleEditFormSubmit(event, courseId);
-        }, { once: true }); // Solo una ejecución por apertura
+        }, { once: true });
         formEdit.querySelector('.cancel').addEventListener('click', cancelClick);
     } else if (action === 'delete') {
         modal.innerHTML = '';
