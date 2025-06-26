@@ -22,12 +22,12 @@ async function openModal(action, element) {
             <p>Completa la informacion para crear un nuevo curso. Podras agregar temas despues</p>
             <div class="item-course">
                 <h4>Titulo de curso</h4>
-                <input id="course-title" type="text" placeholder="Ej: Matetica Discreta" required>
+                <input id="course-title" type="text" placeholder="Ej: Matematica Discreta" required>
                 <span id="error-message"></span>
             </div>
             <div class="item-course">
-                <h4>Bibliografía</h4>
-                <input id="course-bibliography" type="text" placeholder="Aguilera, N. (2020). Matemáticas Discretas: Fundamentos y Aplicaciones. Editorial Síntesis." required>
+                <h4>Descripcion</h4>
+                <input id="course-bibliography" type="text" placeholder="Matemáticas Discretas: Fundamentos y Aplicaciones. Editorial Síntesis." required>
             </div>
             <div class="options-add-close">
                 <button type="button" class="cancel" onclick="closeModal()">Cancelar</button>
@@ -136,22 +136,38 @@ function cancelClick() {
 
 async function handleCreateFormSubmit(event) {
     event.preventDefault();
-    const title = document.getElementById('course-title').value;
-    const bibliography = document.getElementById('course-bibliography').value;
-    const courseCard = await createCourseCard(title, bibliography);
-    const coursesContainer = document.querySelector('.courses-container');
-    const rows = coursesContainer.querySelectorAll('.courses-row');
-    if (rows.length === 0 || rows[rows.length - 1].children.length >= 3) {
-        const newRow = document.createElement('div');
-        newRow.classList.add('courses-row');
-        newRow.appendChild(courseCard);
-        coursesContainer.appendChild(newRow);
-    } else {
-        rows[rows.length - 1].appendChild(courseCard);
-    }
-    event.target.reset();
-    closeModal();
 
+    const form = event.target;
+    const submitButton = form.querySelector('.create');
+
+    // Desactivar el botón
+    submitButton.disabled = true;
+
+    try {
+        const title = document.getElementById('course-title').value;
+        const bibliography = document.getElementById('course-bibliography').value;
+        const courseCard = await createCourseCard(title, bibliography);
+        const coursesContainer = document.querySelector('.courses-container');
+        const rows = coursesContainer.querySelectorAll('.courses-row');
+
+        if (rows.length === 0 || rows[rows.length - 1].children.length >= 3) {
+            const newRow = document.createElement('div');
+            newRow.classList.add('courses-row');
+            newRow.appendChild(courseCard);
+            coursesContainer.appendChild(newRow);
+        } else {
+            rows[rows.length - 1].appendChild(courseCard);
+        }
+
+        // Resetear el formulario y cerrar el modal
+        form.reset();
+        closeModal();
+    } catch (error) {
+        console.error('Error en POST:', error.message);
+    } finally {
+        // Reactivar el botón
+        submitButton.disabled = false;
+    }
 }
 
 async function createCourseCard(title, bibliography) {
@@ -245,33 +261,41 @@ async function getDataCourse(idCourse) {
 
 
 
-async function handleEditFormSubmit(event, idCourse){
-
+async function handleEditFormSubmit(event, idCourse) {
     event.preventDefault();
-    const title = document.getElementById('course-title').value;
-    const bibliography = document.getElementById('course-bibliography').value;
-    const data = {
-        title: title,
-        contentBibliography: bibliography
+
+    const form = event.target;
+    const submitButton = form.querySelector('.create');
+
+    // Desactivar el botón
+    submitButton.disabled = true;
+
+    try {
+        const title = document.getElementById('course-title').value;
+        const bibliography = document.getElementById('course-bibliography').value;
+        const data = { title, contentBibliography: bibliography };
+
+        const response = await fetch(`https://studyhub.emmanueldev.com.ar/api/user/courses/${idCourse}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data),
+            credentials: 'include'
+        });
+
+        if (!response.ok) {
+            throw new Error('Error al actualizar el curso');
+        }
+
+        const dataResponse = await response.json();
+        const card = document.querySelector(`[data-id="${idCourse}"]`);
+        const titleCard = card.querySelector('h2');
+        titleCard.textContent = dataResponse.title;
+
+        closeModal();
+    } catch (error) {
+        console.error('Error al editar:', error.message);
+    } finally {
+        // Reactivar el botón
+        submitButton.disabled = false;
     }
-    const response = await fetch(`https://studyhub.emmanueldev.com.ar/api/user/courses/${idCourse}`, {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-        credentials: 'include'
-    });
-    
-    if (!response.ok) {
-        window.location.href = "/";
-    }
-    const dataResponse = await response.json();
-    const card = document.querySelector(`[data-id="${idCourse}"]`)
-
-    const titleCard = card.querySelector('h2');
-
-    titleCard.textContent = dataResponse.title
-
-    closeModal();
 }
