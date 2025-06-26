@@ -113,7 +113,7 @@ function switchContent(contentType, button) {
                 // Crear enlace clickeable
                 const link = document.createElement('a');
                 link.textContent = file.fileName;
-                link.href = `/api/files/${file.id}`;
+                link.href = `/api/user/courses/files/${file.id}`;
                 link.target = '_blank';
                 link.rel = 'noopener noreferrer';
 
