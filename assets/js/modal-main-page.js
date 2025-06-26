@@ -37,7 +37,7 @@ async function openModal(action, element) {
         `;
         modal.appendChild(formCreate);
 
-        formCreate.addEventListener('submit', handleCreateFormSubmit);
+        formCreate.addEventListener('submit', handleCreateFormSubmit, { once: true });
         formCreate.querySelector('.cancel').addEventListener('click', cancelClick);
     } else if (action === 'edit') {
         modal.innerHTML = '';
