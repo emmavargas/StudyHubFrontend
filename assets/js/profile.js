@@ -1,20 +1,29 @@
 const containers = document.querySelectorAll('.container');
 
-async function logoutSesion() {
+document.addEventListener("DOMContentLoaded", async function (){
+
     try {
-        const response = await fetch('http://localhost:8080/api/logout', {
-            method: 'POST',
+        const response = await fetch('http://localhost:8080/api/user/courses',{
+            method: 'GET',
             credentials: 'include'
         });
-        if (!response.ok) {
-            throw new Error('Error al cerrar sesión');
+        if(!response.ok){
+            window.location.href = "/";
         }
-        window.location.href = '/';
-    } catch (error) {
-        console.error('Error:', error);
-        window.location.href = '/';
+        const data = await response.json();
+        const countCourses = document.querySelector('.number-courses');
+        countCourses.innerHTML = data.length;
+    }catch(error){
+        console.log('error',  error)
+        window.location.href = "/";
+
     }
-}
+
+});
+
+
+
+
 
 
 containers.forEach(container =>{
@@ -27,21 +36,41 @@ containers.forEach(container =>{
         const groupBtn = containerInput.querySelector('.btn-group');     
 
 
-        if(btn.classList.contains('edit')){
+        if (btn.classList.contains('edit')) {
+
+            // Si estamos editando email y username, cargamos datos actuales del backend
+            if (btn.dataset.action === 'edit-email-username') {
+                try {
+                    const response = await fetch('http://localhost:8080/api/user/me', {
+                        method: 'GET',
+                        credentials: 'include'
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        inputs[0].value = data.email || '';
+                        inputs[1].value = data.username || '';
+                    } else {
+                        console.error('No se pudo obtener datos del usuario');
+                    }
+                } catch (error) {
+                    console.error('Error al obtener datos del usuario:', error);
+                }
+            }
 
             inputs.forEach(input => {
                 input.disabled = false;
             });
-                    groupBtn.innerHTML = `
-            <button class="btn-cancel" data-action="${btn.dataset.action}" type="button">
-                <img src="/assets/img/cancel.svg" alt="cancelar">
-                <span>Cancelar</span>
-            </button>
-            <button class="btn-save" data-action="${btn.dataset.action}" type="button">
-                <img src="/assets/img/save.svg" alt="guardar">
-                <span>Guardar</span>
-            </button>
-        `;
+
+            groupBtn.innerHTML = `
+                <button class="btn-cancel" data-action="${btn.dataset.action}" type="button">
+                    <img src="/assets/img/cancel.svg" alt="cancelar">
+                    <span>Cancelar</span>
+                </button>
+                <button class="btn-save" data-action="${btn.dataset.action}" type="button">
+                    <img src="/assets/img/save.svg" alt="guardar">
+                    <span>Guardar</span>
+                </button>
+            `;
         }
 
         if (btn.classList.contains('btn-cancel')) {
@@ -90,6 +119,7 @@ function saveNameLastname(btnAction){
         name: inputs[0].value,
         lastname: inputs[1].value
     }
+
     const response = fetch('http://localhost:8080/api/user/edit-name-lastname', {
         method: 'PUT',
         headers: {
@@ -106,31 +136,76 @@ function saveNameLastname(btnAction){
     })
 }
 
-function saveEmailUsername(btnAction){
-
-    btn = document.querySelector(`button[data-action="${btnAction}"]`);
+async function saveEmailUsername(btnAction) {
+    const btn = document.querySelector(`button[data-action="${btnAction}"]`);
     const containerInput = btn.closest('.container');
     const inputs = containerInput.querySelectorAll('div input');
+    const groupBtn = containerInput.querySelector('.btn-group');
 
-    let data = {
-        username: inputs[0].value,
-        email: inputs[1].value
+    const data = {
+        email: inputs[0].value.trim(),
+        username: inputs[1].value.trim()
+    };
+    if (!data.email) {
+        alert('El campo email es obligatorio.');
+        inputs[0].focus();
+        return;
     }
-    const response = fetch('http://localhost:8080/api/user/edit-email-username', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify(data)
-    })
-    .then(response => {
+    if (!data.username) {
+        alert('El campo nombre de usuario es obligatorio.');
+        inputs[1].focus();
+        return;
+    }
+
+    try {
+        const response = await fetch('http://localhost:8080/api/update-email-username', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(data)
+        });
+
+        const responseData = await response.json();
+
+        const errorBox = containerInput.querySelector('.error-email-username');
         if (!response.ok) {
-            throw new Error('Error al guardar los datos');
+            // Mostrar errores según conflicto
+            let errorMsg = '';
+            if (responseData.emailExists) {
+                errorMsg += 'El correo ya está en uso.<br>';
+            }
+            if (responseData.usernameExists) {
+                errorMsg += 'El nombre de usuario ya está en uso.';
+            }
+
+            if (errorBox) {
+                errorBox.innerHTML = errorMsg;
+                errorBox.style.display = 'flex';
+            }
+            return;
         }
-        return response.json();
-    })
+
+        // Éxito
+        if (errorBox) errorBox.style.display = 'none';
+        inputs.forEach(input => input.disabled = true);
+        groupBtn.innerHTML = `
+            <button class="edit" type="button" data-action="${btn.dataset.action}">
+                <img src="/assets/img/write.svg" alt="editar perfil">Editar
+            </button>
+        `;
+
+    } catch (error) {
+        console.error('Error al guardar:', error);
+    }
 }
+
+
+
+
+
+
 async function savePassword(btnAction){
 
     btn = document.querySelector(`button[data-action="${btnAction}"]`);

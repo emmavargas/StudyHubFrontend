@@ -1,3 +1,25 @@
+document.addEventListener("DOMContentLoaded", async function (){
+
+    try {
+        const response = await fetch('http://localhost:8080/api/user/courses',{
+            method: 'GET',
+            credentials: 'include'
+        });
+        if(response.ok){
+            window.location.href = "/user/courses";
+
+        }
+    }catch(error){
+        console.log('error',  error)
+        window.location.href = "/";
+
+    }
+
+});
+
+
+
+
 const pasos = [
     
     `<div>
@@ -78,8 +100,6 @@ const pasoSiguiente = ()=> {
         if(pasoActual === 0){
             console.log('Paso 1');
             const inputEmail = document.getElementById('email');
-
-            console.log(inputEmail.value);
             email = inputEmail.value;
             emailSendCode(email);
 
@@ -88,7 +108,6 @@ const pasoSiguiente = ()=> {
             const inputCode = document.getElementById('codigo');
             code = inputCode.value;
             verifyCode();
-            console.log(inputCode.value);
         
         }else if(pasoActual === 2){
             console.log('Paso 3');
@@ -97,8 +116,6 @@ const pasoSiguiente = ()=> {
             newPassword = inputNewPassword.value;
             confirmNewPassword = inputConfirmNewPassword.value;
             resetPassword();
-            console.log(newPassword);
-            console.log(confirmNewPassword);
         }
     }
 }
@@ -135,14 +152,9 @@ async function emailSendCode(email){
         const errorMessage = document.querySelector('.error-password');
         const responseData = await response.json();
 
-        console.log("entro a funcion send email");
-
         if(response.ok){
             pasoActual++;
             mostrarPaso(pasoActual);
-            console.log('entre a enviar el email');
-            console.log(responseData);
-            console.log(responseData.message);
         }
         if (!response.ok) {
             errorMessage.style.display = 'flex';
@@ -176,9 +188,6 @@ async function verifyCode(){
         if(response.ok){
             pasoActual++;
             mostrarPaso(pasoActual);
-            console.log('entre a verificar el codigo');
-            console.log(responseData);
-            console.log(responseData.message);
         }
         if (!response.ok) {
             errorMessage.style.display = 'flex';

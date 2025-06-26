@@ -62,9 +62,9 @@ function createTopics(dataTopics){
 }
 
 
-
 function switchContent(contentType, button) {
     const card = button.closest('.item-card');
+    const idTopic = card.dataset.id;
     
     const buttons = card.querySelectorAll('.switch-btn');
     
@@ -75,11 +75,11 @@ function switchContent(contentType, button) {
     const paragraph = card.querySelector('p');
     
     fetch(`http://localhost:8080/api/user/courses/${idCourse}/topics/${card.dataset.id}`, {
-        method:'GET',
-        credentials:'include'
+        method: 'GET',
+        credentials: 'include'
     })
     .then(response => {
-        if(!response.ok){
+        if (!response.ok) {
             throw new Error('Error en la solicitud de tema');
         }
         return response.json();
@@ -88,7 +88,71 @@ function switchContent(contentType, button) {
         if (contentType === 'description') {
             paragraph.textContent = data.description;
         } else if (contentType === 'bibliography') {
-            paragraph.textContent = data.bibliography;
+            const listContainer = document.createElement('ul');
+            listContainer.classList.add('bibliography-list');
+
+            data.fileAttachments.forEach(file => {
+                const li = document.createElement('li');
+                li.classList.add('bibliography-item');
+                li.dataset.id = file.id;
+
+                const icon = document.createElement('img');
+
+                // Elegir ícono
+                if (file.contentType === 'application/pdf') {
+                    icon.src = '/assets/img/pdf.svg';
+                    icon.alt = 'PDF';
+                } else if (file.contentType === 'application/msword' || file.contentType === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document') {
+                    icon.src = '/assets/img/word.svg';
+                    icon.alt = 'Word';
+                } else if (file.contentType === 'text/plain') {
+                    icon.src = '/assets/img/txt.svg';
+                    icon.alt = 'TXT';
+                }
+
+                // Crear enlace clickeable
+                const link = document.createElement('a');
+                link.textContent = file.fileName;
+                link.href = `/api/files/${file.id}`;
+                link.target = '_blank';
+                link.rel = 'noopener noreferrer';
+
+                // Botón de eliminar (X)
+                const deleteBtn = document.createElement('span');
+                deleteBtn.textContent = '✖';
+                deleteBtn.classList.add('delete-file');
+                deleteBtn.title = 'Eliminar archivo';
+                deleteBtn.onclick = () => {
+                    fetch(`http://localhost:8080/api/user/courses/${idCourse}/topics/${idTopic}/files/${file.id}`, {
+                        method: 'DELETE',
+                        credentials: 'include'
+                    })
+                    .then(response => {
+                        if (!response.ok) {
+                            return response.text().then(text => {
+                                throw new Error(`Error al eliminar el archivo: ${text}`);
+                            });
+                        }
+                        console.log('Archivo eliminado correctamente');
+                        // Eliminar el <li> del DOM
+                        deleteBtn.closest('li').remove();
+                    })
+                    .catch(error => {
+                        console.error('Error al eliminar archivo:', error);
+                        alert(`Error: ${error.message}`);
+                    });
+                };
+
+                // Agregar elementos al li
+                li.appendChild(icon);
+                li.appendChild(link);
+                li.appendChild(deleteBtn);
+
+                listContainer.appendChild(li);
+            });
+
+            paragraph.innerHTML = '';
+            paragraph.appendChild(listContainer);
         }
     })
     .catch(error => {
@@ -99,6 +163,9 @@ function switchContent(contentType, button) {
 
 function deleteTopic(element){
     const topicCard = element.closest('.item-card');
+    const idTopic = topicCard.dataset.id;
+    console.log(idTopic);
+    
 
     fetch(`http://localhost:8080/api/user/courses/${idCourse}/topics/${idTopic}`, {
         method: 'DELETE',
@@ -108,7 +175,10 @@ function deleteTopic(element){
         if (!response.ok) {
             throw new Error('Error al eliminar el tema');
         }
+        console.log('Tema eliminado correctamente');
+        console.log(idTopic);
         topicCard.remove();
+
     })
     .catch(error => {
         console.error('Error:', error);

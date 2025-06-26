@@ -244,6 +244,48 @@ a {
     font-weight: 400;
 }
 
+
+
+
+.bibliography-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.bibliography-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.bibliography-item img {
+  width: 20px;
+  height: 20px;
+}
+
+.bibliography-item a {
+  flex-grow: 1;
+  text-decoration: none;
+  color: #000;
+}
+
+.bibliography-item .delete-file {
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+  margin-left: auto;
+}
+
+
+
+
+
+
+
+
+
 .topics-container {
     display: flex;
     flex-direction: column;
@@ -422,6 +464,74 @@ a {
 .item-card-modal input:focus {
     outline: none;
     border-color: rgb(102, 100, 100);
+}
+.pdf-drop-zone {
+    width: 100%;
+    padding: 20px;
+    border: 2px dashed #ccc;
+    border-radius: 5px;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    color: #666;
+}
+
+.pdf-drop-zone p {
+    margin: 5px 0;
+}
+
+.pdf-drop-zone .select-files {
+    color: #007bff;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.pdf-drop-zone .select-files:hover {
+    color: #0056b3;
+}
+
+.pdf-drop-zone.dragover {
+    background-color: #f0f0f0;
+    border-color: #999;
+}
+
+.files-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px; /* Espacio reducido entre elementos */
+}
+
+.files-list li {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 2px 0;
+}
+
+.files-list li .file-item {
+    display: flex;
+    align-items: center;
+}
+
+.files-list li img {
+    vertical-align: middle;
+    width: 20px;
+    margin-right: 4px; /* Espacio mínimo entre imagen y texto */
+}
+
+.files-list li span {
+    margin-left: 0;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #333;
+    white-space: nowrap; /* Evita que el texto se desborde en varias líneas */
+    overflow: hidden; /* Oculta el texto que excede */
+    text-overflow: ellipsis; /* Muestra ... cuando el texto es demasiado largo */
+    max-width: 200px; /* Ajusta este valor según el ancho del modal */
 }
 
 .options-add-close {

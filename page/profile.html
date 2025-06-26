@@ -19,7 +19,7 @@
             </div>
             <div class="nav-center">
                 <nav>
-                    <a href="/">Caracteristicas</a>
+                    <a href="/how-it-works#caracteristicas">Caracteristicas</a>
                     <a href="/how-it-works">Como funciona</a>
                     <a href="/reference">Referencias</a>
                 </nav>
@@ -81,12 +81,15 @@
                     <div class="group-inputs">
                         <div class="input">
                             <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="Ingrese su email" required disabled>
+                            <input type="email" id="email" name="email" placeholder="Ingrese su email" required>
                         </div>
                         <div class="input">
                             <label for="username">Nombre de usuario</label>
-                            <input type="text" id="username" name="username" placeholder="Ingrese su nombre de usuario" required disabled>
+                            <input type="text" id="username" name="username" placeholder="Ingrese su nombre de usuario" required>
                         </div>
+                    </div>
+                    <div class="error-email-username" style="display: none; color: red; margin-top: 10px; padding-left: 10px;">
+                        <!-- El JS rellenará los mensajes de error acá -->
                     </div>
                 </div>
 
@@ -127,7 +130,7 @@
                     </div>
                     <div class="container-courses">
                         <div class="courses-information">
-                            <h2>2</h2>
+                            <h2 class="number-courses">2</h2>
                             <span>Cursos cargados</span>
                         </div>
                         <button class="btn" type="button" onclick="window.location.href='/user/courses'">Ver mis cursos</button>
@@ -141,6 +144,7 @@
 
     <div class="modal"></div>
 
+    <script src="/assets/js/verify-auth.js"></script>
     <script src="/assets/js/profile.js"></script>
 </body>
 </html>

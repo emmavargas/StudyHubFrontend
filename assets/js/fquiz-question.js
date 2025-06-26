@@ -359,6 +359,34 @@ function ErrorConnectionAi(){
 }
 
 
+
+
+function toManyRequest(){
+    const divLoading = document.getElementById('loading');
+    const divPage = document.getElementById('page-load');
+    const divResult = document.getElementById('result-container');
+    const divError = document.querySelector('.error-container');
+    divLoading.style.display = 'none';
+    divPage.style.display = 'none';
+    divResult.style.display = 'none';
+    divError.style.display = 'flex';
+
+    divError.innerHTML = `
+        <div class="title-error-container">
+            <h3>Limite de exámenes alcanzado</h3>
+            <img src="/assets/img/error-connection.svg" alt="Error de conexion">
+        </div>
+        <img class="icon-big" src="/assets/img/error-connection.svg" alt="Error de conexion">
+        <span>Has alcanzado el límite de exámenes diarios. Podrás realizar más exámenes en 30 minutos.</span>
+        <div class="container-btn-error">
+            <button class="reload-connection-btn" onclick="reloadPage()">Reintentar</button>
+            <button class="back-course" onclick="window.location.href='/user/courses'">Volver a Cursos</button>
+        </div>
+    `
+}
+
+
+/*
 function toManyRequest(){
     const divLoading = document.getElementById('loading');
     const divPage = document.getElementById('page-load');
@@ -382,6 +410,7 @@ function toManyRequest(){
         </div>
     `
 }
+*/
     
 function reloadPage(){
     window.location.href = `/user/courses/${idCourse}/exam-ai`

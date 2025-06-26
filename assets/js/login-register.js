@@ -133,7 +133,7 @@ async function handlerLoginForSubmit(e)  {
     }catch(error){
         console.error('Error:', error);
         message.style.display = 'flex';
-        message.innerHTML = 'Error al iniciar sesión. Por favor, verifica tus credenciales.';
+        message.innerHTML = 'Usuario o contraseña incorrectos. Intentalo nuevamente.';
     };
     e.target.reset();
 }
@@ -173,7 +173,7 @@ async function handlerRegisterForSubmit(e)  {
     }catch(error){
         console.error('Error:', error);
         message.style.display = 'flex';
-        message.innerHTML = 'Error al registrar. Por favor, verifica tus credenciales.';
+        message.innerHTML = 'No se pudo completar el registro. El correo electrónico o nombre de usuario ya están en uso.';
     }
     e.target.reset();
 }
