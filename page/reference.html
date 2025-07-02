@@ -1,21 +1,77 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página en Desarrollo - StudyHub</title>
-    <link rel="stylesheet" href="/assets/css/status-pages.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>StudyHub</title>
+  <link rel="stylesheet" href="/assets/css/status-pages.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet"/>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo">StudyHub</div>
-            <a href="/" class="btn-home">Volver al Inicio</a>
-        </nav>
+  <header>
+        <div class="logo">
+            <img src="assets/img/libro.png" alt="Logo de StudyHub">
+            <a href="/user/courses"><span>StudyHub</span></a>
+        
+        </div>
+
+        <div class="nav-center">
+            <nav>
+                <a href="#caracteristicas">Caracteristicas</a>
+                <a href="/how-it-works">Como funciona</a>
+                <a href="/reference">Contacto</a>
+            </nav>
+        </div>
+
+        <div class="nav-actions">
+            <nav>
+                <a href="/auth">Iniciar sesion</a>
+                <button class="register" type="button" onclick="window.location.href='/auth'">Registrarse</button>
+            </nav>
+        </div>
     </header>
-    <main>
-        <h1>Página en Desarrollo</h1>
-        <p>Esta sección está en construcción. ¡Vuelve pronto para ver las actualizaciones!</p>
-    </main>
+
+  <main class="reference-main">
+    <div class="container">
+      <h1>Contacto</h1>
+      <p class="subtitulo">Información para consultas, soporte o colaboración</p>
+
+      <div class="card-container">
+        <div class="card">
+          <h3>📧 Email</h3>
+          <p>emma.vargasvasquez@gmail.com</p>
+        </div>
+
+        <div class="card">
+          <h3>📱 Teléfono</h3>
+          <p>+54 11 7064-7372</p>
+        </div>
+
+        <div class="card">
+          <h3>💼 LinkedIn</h3>
+          <p><a href="https://linkedin.com/in/emmanuelvargas-arg" target="_blank">linkedin.com/in/emmanuelvargas-arg</a></p>
+        </div>
+
+        <div class="card">
+          <h3>💻 GitHub</h3>
+          <p><a href="https://github.com/emmavargas" target="_blank">github.com/emmavargas</a></p>
+        </div>
+
+        <div class="card">
+          <h3>🌐 Portfolio</h3>
+          <p><a href="https://emmavargas.github.io/portfolio/" target="_blank">emmavargas.github.io/portfolio/</a></p>
+        </div>
+
+        <div class="card">
+          <h3>📍 Ubicación</h3>
+          <p>Buenos Aires, Argentina</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="/assets/js/verify-auth.js"></script>
 </body>
 </html>

@@ -158,7 +158,7 @@ async function saveEmailUsername(btnAction) {
     }
 
     try {
-        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/update-email-username', {
+        const response = await fetch('https://studyhub.emmanueldev.com.ar/pi/update-email-username', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
