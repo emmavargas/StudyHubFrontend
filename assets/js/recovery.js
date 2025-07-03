@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", async function (){
 
     try {
-        const response = await fetch('http://localhost:8080/api/user/courses',{
+        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/user/courses',{
             method: 'GET',
             credentials: 'include'
         });
@@ -141,7 +141,7 @@ async function emailSendCode(email){
     }
 
     try{
-        const response = await fetch('http://localhost:8080/api/recovery-password/send-email-code', {
+        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/recovery-password/send-email-code', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -175,7 +175,7 @@ async function verifyCode(){
     }
 
     try{
-        const response = await fetch('http://localhost:8080/api/recovery-password/confirmation-code', {
+        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/recovery-password/confirmation-code', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -210,7 +210,7 @@ async function resetPassword(){
     }
 
     try{
-        const response = await fetch('http://localhost:8080/api/recovery-password/reset-password', {
+        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/recovery-password/reset-password', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
