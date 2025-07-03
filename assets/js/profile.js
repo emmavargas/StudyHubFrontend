@@ -3,7 +3,7 @@ const containers = document.querySelectorAll('.container');
 document.addEventListener("DOMContentLoaded", async function (){
 
     try {
-        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/user/courses',{
+        const response = await fetch('http://localhost:8080/api/user/courses',{
             method: 'GET',
             credentials: 'include'
         });
@@ -41,7 +41,7 @@ containers.forEach(container =>{
             // Si estamos editando email y username, cargamos datos actuales del backend
             if (btn.dataset.action === 'edit-email-username') {
                 try {
-                    const response = await fetch('https://studyhub.emmanueldev.com.ar/api/user/me', {
+                    const response = await fetch('http://localhost:8080/api/user/me', {
                         method: 'GET',
                         credentials: 'include'
                     });
@@ -56,6 +56,25 @@ containers.forEach(container =>{
                     console.error('Error al obtener datos del usuario:', error);
                 }
             }
+
+            if (btn.dataset.action === 'edit-name-lastname') {
+                try {
+                    const response = await fetch('http://localhost:8080/api/user/me', {
+                        method: 'GET',
+                        credentials: 'include'
+                    });
+                    if (response.ok) {
+                        const data = await response.json();
+                        inputs[0].value = data.name || '';
+                        inputs[1].value = data.lastname || '';
+                    } else {
+                        console.error('No se pudo obtener datos del usuario');
+                    }
+                } catch (error) {
+                    console.error('Error al obtener datos del usuario:', error);
+                }
+            }   
+            
 
             inputs.forEach(input => {
                 input.disabled = false;
@@ -109,31 +128,52 @@ containers.forEach(container =>{
 })
 
 
-function saveNameLastname(btnAction){
+async function saveNameLastname(btnAction){
 
     btn = document.querySelector(`button[data-action="${btnAction}"]`);
     const containerInput = btn.closest('.container');
     const inputs = containerInput.querySelectorAll('div input');
+    const groupBtn = containerInput.querySelector('.btn-group');
 
-    let data = {
+
+    const data = {
         name: inputs[0].value,
         lastname: inputs[1].value
     }
 
-    const response = fetch('https://studyhub.emmanueldev.com.ar/api/user/edit-name-lastname', {
-        method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        credentials: 'include',
-        body: JSON.stringify(data)
-    })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Error al guardar los datos');
-        }
-        return response.json();
-    })
+    if (!data.name) {
+        alert('El campo nombre es obligatorio.');
+        inputs[0].focus();
+        return;
+    }
+    if (!data.lastname) {
+        alert('El campo apellido es obligatorio.');
+        inputs[1].focus();
+        return;
+    }
+    try {
+        const response = await fetch('http://localhost:8080/api/update-name-lastname', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            credentials: 'include',
+            body: JSON.stringify(data)
+        });
+
+        const responseData = await response.json();
+
+        // Éxito
+        inputs.forEach(input => input.disabled = true);
+        groupBtn.innerHTML = `
+            <button class="edit" type="button" data-action="${btn.dataset.action}">
+                <img src="/assets/img/write.svg" alt="editar perfil">Editar
+            </button>
+        `;
+
+    } catch (error) {
+        console.error('Error al guardar:', error);
+    }
 }
 
 async function saveEmailUsername(btnAction) {
@@ -158,7 +198,7 @@ async function saveEmailUsername(btnAction) {
     }
 
     try {
-        const response = await fetch('https://studyhub.emmanueldev.com.ar/pi/update-email-username', {
+        const response = await fetch('http://localhost:8080/api/update-email-username', {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -221,7 +261,7 @@ async function savePassword(btnAction){
     }
     try{
 
-        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/update-password', {
+        const response = await fetch('http://localhost:8080/api/update-password', {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'

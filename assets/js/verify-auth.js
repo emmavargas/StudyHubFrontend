@@ -1,6 +1,6 @@
 async function logoutSesion() {
     try {
-        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/logout', {
+        const response = await fetch('http://localhost:8080/api/logout', {
             method: 'POST',
             credentials: 'include'
         });

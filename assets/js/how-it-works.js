@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', async function(){
 
 
     try{
-        const response = await fetch('https://studyhub.emmanueldev.com.ar/api/user/courses',{
+        const response = await fetch('http://localhost:8080/api/user/courses',{
             method: 'GET',
             credentials: 'include'
         });
