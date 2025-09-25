@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async function(){
             const stateLogin = document.querySelector('.nav-actions');
             stateLogin.innerHTML  = `
                 <nav class="nav-actions-profile">
-                    <button class="profile" type="button" onclick="window.location.href='/user/courses'">
+                    <button class="profile" type="button" onclick="window.location.href='/profile'">
                         <img src="/assets/img/profile.svg" alt="perfil">
                         <span>Perfil</span>
                     </button>     

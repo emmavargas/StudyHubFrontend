@@ -445,3 +445,154 @@ a {
 .btn:hover {
     background-color: #e7e7e7;
 }
+
+
+@media (max-width: 768px) {
+    /* Header - mantenemos como está */
+    header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .header-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 0 10px;
+    }
+    .nav-center {
+        white-space: nowrap;
+    }
+
+    /* Profile content responsive */
+    .main-container {
+        padding: 140px 10px 20px 10px;
+    }
+    
+    .main-container h1 {
+        text-align: center;
+        padding-left: 0;
+        font-size: 22px;
+        margin-bottom: 20px;
+    }
+
+    .container-profile {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .container-data {
+        width: 100%;
+        padding: 0;
+    }
+
+    .profile-courses {
+        width: 100%;
+        padding: 15px;
+    }
+
+    /* Form sections */
+    .information-personal-container, 
+    .email-username-container, 
+    .password-container {
+        padding: 15px;
+    }
+
+    /* Input groups responsive */
+    .group-inputs {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .input {
+        width: 100%;
+    }
+
+    /* Title sections */
+    .title {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 10px 0;
+    }
+
+    .title h2 {
+        font-size: 16px;
+    }
+
+    .btn-group {
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Course section */
+    .profile-courses-container {
+        padding: 15px;
+    }
+
+    .courses-information h2 {
+        font-size: 24px;
+    }
+
+    .courses-information span {
+        font-size: 13px;
+    }
+}
+
+/* Mobile pequeño - hasta 480px */
+@media (max-width: 480px) {
+    .main-container {
+        padding: 140px 5px 20px 5px;
+    }
+
+    .main-container h1 {
+        font-size: 20px;
+    }
+
+    /* Secciones más compactas */
+    .information-personal-container,
+    .email-username-container,
+    .password-container,
+    .profile-courses-container {
+        padding: 10px;
+    }
+
+    /* Títulos más pequeños */
+    .title h2 {
+        font-size: 14px;
+    }
+
+    /* Inputs más compactos */
+    .input label,
+    .input-password label {
+        font-size: 11px;
+    }
+
+    .input input,
+    .input-password input {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+
+    /* Botones más pequeños */
+    .edit,
+    .btn-save,
+    .btn-cancel {
+        padding: 8px 15px;
+        font-size: 12px;
+    }
+
+    /* Sección de cursos */
+    .courses-information h2 {
+        font-size: 20px;
+    }
+
+    .courses-information span {
+        font-size: 12px;
+    }
+
+    .btn {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+}

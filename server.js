@@ -5,6 +5,11 @@ const port = 3000;
 
 app.use(express.json());
 
+app.use((req, res, next) => {
+  res.setTimeout(30000); // 60 segundos
+  next();
+});
+
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
 
 app.use(express.static(path.join(__dirname, 'page')));
