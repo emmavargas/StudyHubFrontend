@@ -338,7 +338,12 @@ a {
 
     /* Arreglar título tapado por header en móviles */
     .main-container {
-        padding: 150px 20px 20px 20px;
+        padding: 110px 20px 20px 20px;
+    }
+    
+    .container-title {
+        scroll-margin-top: 120px;
+        margin-top: 60px;
     }
 
     /* Nombre y Apellido en columna para móviles */

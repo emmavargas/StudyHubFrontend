@@ -466,7 +466,7 @@ a {
 
     /* Profile content responsive */
     .main-container {
-        padding: 180px 10px 20px 10px;
+        padding: 110px 10px 20px 10px;
     }
     
     .main-container h1 {
@@ -474,6 +474,8 @@ a {
         padding-left: 0;
         font-size: 22px;
         margin-bottom: 20px;
+        scroll-margin-top: 120px;
+        margin-top: 80px;
     }
 
     .container-profile {
