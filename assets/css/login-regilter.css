@@ -336,6 +336,11 @@ a {
         white-space: nowrap;
     }
 
+    /* Arreglar título tapado por header en móviles */
+    .main-container {
+        padding: 150px 20px 20px 20px;
+    }
+
     /* Nombre y Apellido en columna para móviles */
     .input-group-double {
         flex-direction: column;
