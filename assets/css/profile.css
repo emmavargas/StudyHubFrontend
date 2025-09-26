@@ -383,7 +383,7 @@ a {
     width: 30%;
     border-radius: 10px;
     background-color: white;
-    padding: 20px;
+    padding: 0;
 }
 
 .profile-courses-container {
@@ -393,7 +393,7 @@ a {
     width: 100%;
     border: solid 1px lightgray;
     border-radius: 10px;
-    padding: 15px;
+    padding: 20px;
     background-color: white;
 }
 
@@ -466,7 +466,7 @@ a {
 
     /* Profile content responsive */
     .main-container {
-        padding: 110px 10px 20px 10px;
+        padding: 120px 10px 20px 10px;
     }
     
     .main-container h1 {
@@ -474,8 +474,7 @@ a {
         padding-left: 0;
         font-size: 22px;
         margin-bottom: 20px;
-        scroll-margin-top: 120px;
-        margin-top: 80px;
+        margin-top: 20px;
     }
 
     .container-profile {
@@ -535,8 +534,12 @@ a {
     }
 
     /* Course section */
+    .profile-courses {
+        padding: 0;
+    }
+    
     .profile-courses-container {
-        padding: 15px;
+        padding: 20px;
     }
 
     .courses-information h2 {
