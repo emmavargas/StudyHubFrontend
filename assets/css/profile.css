@@ -404,6 +404,12 @@ a {
     text-align: center;
 }
 
+/* Centrar el título "Mis Cursos" */
+.profile-courses-container .title {
+    justify-content: center;
+    border-bottom: 1px solid lightgray;
+}
+
 .container-courses {
     display: flex;
     flex-direction: column;
