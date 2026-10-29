@@ -6,56 +6,50 @@ const port = 3000;
 app.use(express.json());
 
 app.use((req, res, next) => {
-  res.setTimeout(30000); // 60 segundos
+  res.setTimeout(30000); // 30 segundos
   next();
 });
 
+// Servir archivos estáticos (assets y archivos sueltos en la raíz)
 app.use('/assets', express.static(path.join(__dirname, 'assets')));
-
-app.use(express.static(path.join(__dirname, 'page')));
+app.use(express.static(path.join(__dirname)));
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'page', 'index.html'));
+    res.sendFile(path.join(__dirname, 'index.html'));
 });
 
 app.get('/how-it-works', (req, res) => {
-    res.sendFile(path.join(__dirname, 'page', 'how-it-works.html'));
-    
+    res.sendFile(path.join(__dirname, 'how-it-works.html'));
 });
 
 app.get('/reference', (req, res) => {
-    res.sendFile(path.join(__dirname, 'page', 'reference.html'));
-    
+    res.sendFile(path.join(__dirname, 'reference.html'));
 });
+
 app.get('/auth', (req, res) => {
-    res.sendFile(path.join(__dirname, 'page', 'login-register.html'));
-    
+    res.sendFile(path.join(__dirname, 'login-register.html'));
 });
 
 app.get('/reset-password', (req, res) => {
-    res.sendFile(path.join(__dirname, 'page', 'recovery.html'));
-    
-});
-app.get('/profile', (req, res) => {
-    res.sendFile(path.join(__dirname, 'page', 'profile.html'));
-    
+    res.sendFile(path.join(__dirname, 'recovery.html'));
 });
 
+app.get('/profile', (req, res) => {
+    res.sendFile(path.join(__dirname, 'profile.html'));
+});
 
 app.get('/user/courses', (req, res) => {
-    res.sendFile(path.join(__dirname, 'page', 'main-page.html'));
+    res.sendFile(path.join(__dirname, 'main-page.html'));
 });
 
 app.get('/user/courses/:id', (req, res) => {
     const idCourse = req.params.id;
-    res.sendFile(path.join(__dirname, 'page', 'details-course.html'));
+    res.sendFile(path.join(__dirname, 'details-course.html'));
 });
-
 
 app.get('/user/courses/:id/exam-ai', (req, res) => {
-    res.sendFile(path.join(__dirname, 'page', 'exam-ai.html'));
+    res.sendFile(path.join(__dirname, 'exam-ai.html'));
 });
-
 
 app.listen(port, 'localhost', () => {
     console.log(`Servidor corriendo en http://localhost:${port}`);
