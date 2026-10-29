@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', async function(){
 
 
         try{
-            const response = await fetch('http://localhost:8080/api/user/courses',{
+            const response = await fetch('${API_BASE_URL}/api/user/courses',{
                 method: 'GET',
                 credentials: 'include'
             });
@@ -115,7 +115,7 @@ async function handlerLoginForSubmit(e)  {
 
 
     try{
-        const response = await fetch('http://localhost:8080/api/login',{
+        const response = await fetch('${API_BASE_URL}/api/login',{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -156,7 +156,7 @@ async function handlerRegisterForSubmit(e)  {
         password: password
     }
     try{
-        const response = await fetch('http://localhost:8080/api/register',{
+        const response = await fetch('${API_BASE_URL}/api/register',{
             method:'POST',
             headers: {
                 'Content-Type': 'application/json'

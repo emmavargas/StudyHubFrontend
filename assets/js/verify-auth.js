@@ -1,6 +1,6 @@
 async function logoutSesion() {
     try {
-        const response = await fetch('http://localhost:8080/api/logout', {
+        const response = await fetch('${API_BASE_URL}/api/logout', {
             method: 'POST',
             credentials: 'include'
         });

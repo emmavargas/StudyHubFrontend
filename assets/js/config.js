@@ -1,0 +1,1 @@
+const API_BASE_URL = 'https://studyhub-api-36fef04a040f.herokuapp.com'; // Para producción en Heroku

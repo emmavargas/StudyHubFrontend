@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', async() =>{
     flagIncremetCoount = false;
 
     try{
-        const response = await fetch(`http://localhost:8080/api/user/courses/${idCourse}`, {
+        const response = await fetch(`${API_BASE_URL}/api/user/courses/${idCourse}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -264,7 +264,7 @@ async function loadingPage(courseExamen){
     }
     const animation = animarPantallaCarga();
 
-    const responseExam = fetch(`http://localhost:8080/api/user/courses/${idCourse}/generar-examen`, {
+    const responseExam = fetch(`${API_BASE_URL}/api/user/courses/${idCourse}/generar-examen`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -418,7 +418,7 @@ function reloadPage(){
 
 async function iniciarSuscripcion() {
     try {
-        const response = await fetch('http://localhost:8080/api/payment', {
+        const response = await fetch('${API_BASE_URL}/api/payment', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
